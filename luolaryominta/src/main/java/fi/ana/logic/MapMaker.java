@@ -10,6 +10,8 @@ public class MapMaker {
     
     public Map makeDefaultMap() {
         List<Integer> l = new ArrayList<>();
+        l.add(0);
+        l.add(1);
         Map map = new Map(10,l);
         populateRow(map, 3, 2, 7, 1);
         populateColumn(map, 2, 2, 7, 1);
