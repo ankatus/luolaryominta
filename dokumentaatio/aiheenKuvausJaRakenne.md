@@ -5,3 +5,6 @@ Yhden pelaajan peli, jossa liikutetaan hahmoa neliöistä koostuvalla kentällä
 - Hahmon liikuttaminen neljässä suunnassa.
 - Peliä ennen asetusten valitseminen.
 - Mahdollisesti erilaisten kerättyjen esineiden käyttäminen.
+
+**Luokkakaavio tämänhetkisestä tilanteesta**
+![Luokkakaavio](luokkakaavio.png)
