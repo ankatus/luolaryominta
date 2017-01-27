@@ -12,18 +12,17 @@ public class Map {
         this.acceptableValues = acceptableValues;
     }
 
-    public boolean setValue(int x, int y, int value) {
+    public void setValue(int x, int y, int value) {
 
         if (!isValidCoordinate(x, y)) {
-            return false;
+            throw new IllegalArgumentException("Coordinate out of bounds");
         }
         
         if (!acceptableValues.contains(value)) {
-            return false;
+            throw new IllegalArgumentException("Value not acceptable");
         }
 
         mapValues[y][x] = value;
-        return true;
     }
 
     public int getValue(int x, int y) {
@@ -44,6 +43,14 @@ public class Map {
         }
         
         return true;
+    }
+    
+    public void clear() {
+        for (int i = 0; i < mapValues.length; i++) {
+            for (int j = 0; j < mapValues.length; j++) {
+                mapValues[i][j] = 0;
+            }
+        }
     }
 
 }
