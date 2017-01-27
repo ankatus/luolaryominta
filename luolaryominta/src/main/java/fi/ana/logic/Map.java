@@ -7,11 +7,15 @@ public class Map {
     private int[][] mapValues;
     private List<Integer> acceptableValues;
 
-    public Map(int dimension, List<Integer> acceptableValues) {
-        mapValues = new int[dimension][dimension];
+    public Map(int size, List<Integer> acceptableValues) {
+        mapValues = new int[size][size];
         this.acceptableValues = acceptableValues;
     }
 
+    public int getSize() {
+        return mapValues.length;
+    }
+    
     public void setValue(int x, int y, int value) {
 
         if (!isValidCoordinate(x, y)) {
