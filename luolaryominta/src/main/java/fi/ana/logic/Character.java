@@ -5,13 +5,11 @@ public abstract class Character {
     private int x;
     private int y;
     private int hp;
-    private boolean alive;
 
     public Character(int x, int y, int hp) {
         this.x = x;
         this.y = y;
         this.hp = hp;
-        alive = true;
     }
 
     public int getX() {
@@ -20,6 +18,10 @@ public abstract class Character {
 
     public int getY() {
         return y;
+    }
+    
+    public int getHp() {
+        return hp;
     }
 
     public boolean takeDamage(int value) {
@@ -36,10 +38,6 @@ public abstract class Character {
 
     public boolean move() {
         return false; //TODO
-    }
-
-    public boolean isAlive() {
-        return alive;
     }
 
 }
