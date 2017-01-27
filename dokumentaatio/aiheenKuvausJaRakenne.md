@@ -7,4 +7,5 @@ Yhden pelaajan peli, jossa liikutetaan hahmoa neliöistä koostuvalla kentällä
 - Mahdollisesti erilaisten kerättyjen esineiden käyttäminen.
 
 **Luokkakaavio tämänhetkisestä tilanteesta**
+
 ![Luokkakaavio](luokkakaavio.png)
