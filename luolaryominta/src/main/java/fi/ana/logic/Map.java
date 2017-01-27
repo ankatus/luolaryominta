@@ -15,11 +15,11 @@ public class Map {
     public void setValue(int x, int y, int value) {
 
         if (!isValidCoordinate(x, y)) {
-            throw new IllegalArgumentException("Coordinate out of bounds");
+            return;
         }
         
         if (!acceptableValues.contains(value)) {
-            throw new IllegalArgumentException("Value not acceptable");
+            return;
         }
 
         mapValues[y][x] = value;
@@ -28,7 +28,7 @@ public class Map {
     public int getValue(int x, int y) {
         
         if (!isValidCoordinate(x, y)) {
-            throw new IllegalArgumentException("Coordinate out of bounds");
+            return -1;
         }
         
         return mapValues[y][x];
