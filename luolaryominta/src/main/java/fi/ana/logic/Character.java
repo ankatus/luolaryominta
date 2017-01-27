@@ -34,8 +34,8 @@ public abstract class Character {
         return true;
     }
 
-    public boolean move(int direction) {
-        return false; //to be implemented
+    public boolean move() {
+        return false; //TODO
     }
 
     public boolean isAlive() {
