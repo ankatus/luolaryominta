@@ -2,12 +2,12 @@ package fi.ana.logic;
 
 import java.util.*;
 
-public class Map {
+public class GameMap {
 
     private int[][] mapValues;
     private List<Integer> acceptableValues;
 
-    public Map(int size, List<Integer> acceptableValues) {
+    public GameMap(int size, List<Integer> acceptableValues) {
         mapValues = new int[size][size];
         this.acceptableValues = acceptableValues;
     }
@@ -38,7 +38,7 @@ public class Map {
         return mapValues[y][x];
     }
 
-    private boolean isValidCoordinate(int x, int y) {
+    public boolean isValidCoordinate(int x, int y) {
 
         int lastIndex = mapValues.length - 1;
 
