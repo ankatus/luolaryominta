@@ -6,48 +6,48 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-public class PlayerCharacterTest {
+public class CharacterTest {
     
-    private PlayerCharacter pc;
+    private Character c;
     
-    public PlayerCharacterTest() {
+    public CharacterTest() {
     }
     
     @Before
     public void setUp() {
-        pc = new PlayerCharacter(1,2,3);
+        c = new Character(1,2,3,3);
     }
     
     @Test
     public void constructorSetsValuesCorrectly() {
-        assertEquals(1,pc.getX());
-        assertEquals(2,pc.getY());
-        assertEquals(3, pc.getHp());
+        assertEquals(1,c.getX());
+        assertEquals(2,c.getY());
+        assertEquals(3, c.getHp());
     }
     
     @Test
     public void damageTest() {
-        pc.takeDamage(1);
-        assertEquals(2,pc.getHp());
-        pc.takeDamage(2);
-        assertEquals(0, pc.getHp());
+        c.takeDamage(1);
+        assertEquals(2,c.getHp());
+        c.takeDamage(2);
+        assertEquals(0, c.getHp());
     }
     
     @Test
     public void hpNotNegative() {
-        pc.takeDamage(1000000);
-        assertEquals(0, pc.getHp());
+        c.takeDamage(1000000);
+        assertEquals(0, c.getHp());
     }
     
     @Test
     public void negativeDamageTest() {
-        pc.takeDamage(-100);
-        assertEquals(3, pc.getHp());
+        c.takeDamage(-100);
+        assertEquals(3, c.getHp());
     }
     
     @Test
     public void hpLimitTest() {
-        pc.takeDamage(3);
-        assertEquals(0, pc.getHp());
+        c.takeDamage(3);
+        assertEquals(0, c.getHp());
     }
 }

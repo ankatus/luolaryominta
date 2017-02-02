@@ -7,7 +7,7 @@ import org.junit.Before;
 
 public class MapTest {
 
-    private Map map;
+    private GameMap map;
     
     public MapTest() {
     }
@@ -17,7 +17,7 @@ public class MapTest {
         List<Integer> l = new ArrayList<>();
         l.add(0);
         l.add(1);
-        map = new Map(10, l);
+        map = new GameMap(10, l);
     }
 
     @Test

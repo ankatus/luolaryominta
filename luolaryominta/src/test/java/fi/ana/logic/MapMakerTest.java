@@ -18,14 +18,14 @@ public class MapMakerTest {
 
     @Test
     public void makeDefaultMapRightSize() {
-        Map map = mm.makeDefaultMap();
+        GameMap map = mm.makeDefaultMap();
         assertEquals(10, map.getSize());
     }
 
     @Test
     public void makeDefaultMapCreatesSomething() {
         boolean notEmpty = false;
-        Map map = mm.makeDefaultMap();
+        GameMap map = mm.makeDefaultMap();
         
         for (int y = 0; y < map.getSize(); y++) {
             for (int x = 0; x < map.getSize(); x++) {
