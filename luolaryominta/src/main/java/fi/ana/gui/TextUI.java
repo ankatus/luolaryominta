@@ -3,25 +3,27 @@ package fi.ana.gui;
 import fi.ana.logic.*;
 import java.util.*;
 //temporary text UI for testing
+//TODO:move all turn-logic to other classes
+
 public class TextUI {
 
     Game game;
     Scanner sc;
 
     public TextUI() {
-        game = new Game();
+        game = new Game(5);
         sc = new Scanner(System.in);
     }
 
     public void run() {
         while (true) {
             drawMap(game.getMap());
-            if(!askForInput()) {
+            if (!askForInput()) {
                 break;
             }
         }
     }
-    
+
     private boolean askForInput() {
         System.out.println("Command:");
         String command = sc.nextLine();
@@ -29,6 +31,7 @@ public class TextUI {
             return false;
         }
         game.interpretCommand(command);
+        game.moveMonsters();
         return true;
     }
 
@@ -37,7 +40,7 @@ public class TextUI {
             for (int x = 0; x < map.getSize(); x++) {
                 if (map.getValue(x, y) == 0) {
                     System.out.print("[ ]");
-                } else if (map.getValue(x, y) == 1 ) {
+                } else if (map.getValue(x, y) == 1) {
                     System.out.print("[X]");
                 } else if (map.getValue(x, y) == 2) {
                     System.out.print("[*]");
