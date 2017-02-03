@@ -1,21 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en_GB" lang="en_GB">
 <head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<title>Map xref</title>
+<title>GameMap xref</title>
 <link type="text/css" rel="stylesheet" href="../../../stylesheet.css" />
 </head>
 <body>
-<div id="overview"><a href="../../../../apidocs/fi/ana/logic/Map.html">View Javadoc</a></div><pre>
+<div id="overview"><a href="../../../../apidocs/fi/ana/logic/GameMap.html">View Javadoc</a></div><pre>
 <a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> fi.ana.logic;
 <a class="jxr_linenumber" name="L2" href="#L2">2</a>   
 <a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> java.util.*;
 <a class="jxr_linenumber" name="L4" href="#L4">4</a>   
-<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../fi/ana/logic/Map.html">Map</a> {
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../fi/ana/logic/GameMap.html">GameMap</a> {
 <a class="jxr_linenumber" name="L6" href="#L6">6</a>   
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>       <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong>[][] mapValues;
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>       <strong class="jxr_keyword">private</strong> List&lt;Integer&gt; acceptableValues;
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>      <strong class="jxr_keyword">public</strong> <a href="../../../fi/ana/logic/Map.html">Map</a>(<strong class="jxr_keyword">int</strong> size, List&lt;Integer&gt; acceptableValues) {
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>      <strong class="jxr_keyword">public</strong> <a href="../../../fi/ana/logic/GameMap.html">GameMap</a>(<strong class="jxr_keyword">int</strong> size, List&lt;Integer&gt; acceptableValues) {
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>          mapValues = <strong class="jxr_keyword">new</strong> <strong class="jxr_keyword">int</strong>[size][size];
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>          <strong class="jxr_keyword">this</strong>.acceptableValues = acceptableValues;
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>      }
@@ -46,7 +46,7 @@
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>          <strong class="jxr_keyword">return</strong> mapValues[y][x];
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>      }
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> isValidCoordinate(<strong class="jxr_keyword">int</strong> x, <strong class="jxr_keyword">int</strong> y) {
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">boolean</strong> isValidCoordinate(<strong class="jxr_keyword">int</strong> x, <strong class="jxr_keyword">int</strong> y) {
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>          <strong class="jxr_keyword">int</strong> lastIndex = mapValues.length - 1;
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  
