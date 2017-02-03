@@ -13,9 +13,9 @@ public class MapMaker {
         l.add(1);
         l.add(2);
         l.add(3);
-        GameMap map = new GameMap(10, l);
-        populateRow(map, 3, 2, 7, 1);
-        populateColumn(map, 2, 3, 7, 1);
+        GameMap map = new GameMap(25, l);
+        populateRow(map, 7, 2, 15, 1);
+        populateColumn(map, 6, 3, 15, 1);
         return map;
     }
 
