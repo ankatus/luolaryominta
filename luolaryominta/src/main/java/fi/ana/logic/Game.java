@@ -13,42 +13,59 @@ public class Game {
         mapMaker = new MapMaker();
         map = mapMaker.makeDefaultMap();
         player = new Character(0, 0, 5, 3);
-        move(player, 0, 0); //update player to map
+        moveBy(player, 0, 0); //update player to map
+    }
+
+    public Character getPlayer() {
+        return player;
     }
 
     public GameMap getMap() {
         return map;
     }
 
-    public void movePlayer(String direction) {
+    //probably make a class for this
+    public void interpretCommand(String direction) {
         direction = direction.toLowerCase();
-        if (direction.equals("w")) {
-            if (checkIfPassableCoordinate(player.getX(), player.getY() - 1)) {
-                move(player, 0, -1);
-            }
-        } else if (direction.equals("d")) {
-            if (checkIfPassableCoordinate(player.getX() + 1, player.getY())) {
-                move(player, 1, 0);
-            }
-        } else if (direction.equals("s")) {
-            if (checkIfPassableCoordinate(player.getX(), player.getY() + 1)) {
-                move(player, 0, 1);
-            }
-        } else if (direction.equals("a")) {
-            if (checkIfPassableCoordinate(player.getX() - 1, player.getY())) {
-                move(player, -1, 0);
-            }
+        switch (direction) {
+            case "w":
+                moveBy(player, 0, -1);
+                break;
+            case "d":
+                moveBy(player, 1, 0);
+                break;
+            case "s":
+                moveBy(player, 0, 1);
+                break;
+            case "a":
+                moveBy(player, -1, 0);
+                break;
+            default:
+                break;
         }
     }
 
-    private void move(Character c, int x, int y) {
+    public void moveBy(Character c, int x, int y) {
+        if (!checkIfPassableCoordinate(player.getX() + x, player.getY() + y)) {
+            return;
+        }
         map.setValue(c.getX(), c.getY(), 0);
         c.setX(c.getX() + x);
         c.setY(c.getY() + y);
         map.setValue(c.getX(), c.getY(), c.getType());
     }
-    
-    private boolean checkIfPassableCoordinate(int x, int y) {
+
+    public void moveTo(Character c, int x, int y) {
+        if (!checkIfPassableCoordinate(x, y)) {
+            return;
+        }
+        map.setValue(c.getX(), c.getY(), 0);
+        c.setX(x);
+        c.setY(y);
+        map.setValue(c.getX(), c.getY(), c.getType());
+    }
+
+    public boolean checkIfPassableCoordinate(int x, int y) {
         if (!map.isValidCoordinate(x, y)) {
             return false;
         }
