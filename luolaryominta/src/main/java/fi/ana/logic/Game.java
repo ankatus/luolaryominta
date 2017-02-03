@@ -8,11 +8,19 @@ public class Game {
     private Character player;
     private GameMap map;
     private MapMaker mapMaker;
+    private MonsterMover monsterMover;
 
     public Game() {
+        this(0);
+    }
+
+    public Game(int howManyMonsters) {
+        monsterMover = new MonsterMover(this);
         mapMaker = new MapMaker();
         map = mapMaker.makeDefaultMap();
         player = new Character(0, 0, 5, 3);
+        monsters = initializeMonsters(howManyMonsters);
+        monsterMover.arrangeMonstersRandomly(monsters);
         moveBy(player, 0, 0); //update player to map
     }
 
@@ -70,5 +78,19 @@ public class Game {
             return false;
         }
         return map.getValue(x, y) != 1;
+    }
+
+    public List<Character> initializeMonsters(int howMany) {
+        List<Character> monsters = new ArrayList<>();
+        for (int i = 0; i < howMany; i++) {
+            monsters.add(new Character(0, 0, 5, 2));
+        }
+        return monsters;
+    }
+
+    public void moveMonsters() {
+        for (Character c : monsters) {
+            monsterMover.moveRandomly(c, true);
+        }
     }
 }
