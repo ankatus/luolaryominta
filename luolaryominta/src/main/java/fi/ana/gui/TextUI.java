@@ -28,7 +28,7 @@ public class TextUI {
         if (command.equals("x")) {
             return false;
         }
-        game.movePlayer(command);
+        game.interpretCommand(command);
         return true;
     }
 
