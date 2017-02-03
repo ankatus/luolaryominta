@@ -6,4 +6,5 @@ Päivä | Tunnit | Kuvaus
 26.01.2017 | 2,0h | Koodaus alkaa, ensimmäiset luokat
 27.01.2017 | 3,0h | Lisää luokkia, ensimmäiset testit
 02.02.2017 | 3,5h | Alkeellinen käyttöliittymä testausta varten, liikkumislogiikkaa
+03.02.2017 | 4,0h | Testit pienempiin metodeihin, hirviöiden liikkumislogiikkaa
 ... | ... | ...
