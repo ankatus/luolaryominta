@@ -17,16 +17,15 @@ public class MapMakerTest {
     }
 
     @Test
-    public void makeDefaultMapRightSize() {
-        GameMap map = mm.makeDefaultMap();
-        assertEquals(10, map.getSize());
+    public void defaultMapNotNull() {
+        assertNotNull(mm.makeDefaultMap());
     }
 
     @Test
     public void makeDefaultMapCreatesSomething() {
         boolean notEmpty = false;
         GameMap map = mm.makeDefaultMap();
-        
+
         for (int y = 0; y < map.getSize(); y++) {
             for (int x = 0; x < map.getSize(); x++) {
                 if (map.getValue(x, y) != 0) {
@@ -35,7 +34,7 @@ public class MapMakerTest {
                 }
             }
         }
-        
+
         assertTrue(notEmpty);
     }
 }
