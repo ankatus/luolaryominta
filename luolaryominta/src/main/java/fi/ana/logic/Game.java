@@ -9,15 +9,14 @@ public class Game {
     private List<Character> monsters;
     private Character player;
     private GameMap map;
-    private MapMaker mapMaker;
     private MonsterMover monsterMover;
     private GraphicalUI gui;
 
     public Game() {
         gui = new GraphicalUI(this);
+        monsters = new ArrayList<>();
         monsterMover = new MonsterMover(this);
-        mapMaker = new MapMaker();
-        map = mapMaker.makeDefaultMap();
+        map = MapMaker.makeDefaultMap();
         player = new Character(0, 0, 0, 3);
     }
 
@@ -38,7 +37,7 @@ public class Game {
     }
 
     public void restart() {
-        map = mapMaker.makeDefaultMap();
+        map = MapMaker.makeDefaultMap();
         monsters = initializeMonsters(5);
         monsterMover.arrangeMonstersRandomly(monsters);
         player = new Character(0, 0, 0, 3);

@@ -5,12 +5,12 @@ import java.util.List;
 
 public class MonsterMover {
 
-    private Game g;
+    private Game game;
     private Random r;
 
     public MonsterMover(Game game) {
         r = new Random();
-        this.g = game;
+        this.game = game;
     }
 
     public void arrangeMonstersRandomly(List<Character> monsters) {
@@ -18,14 +18,14 @@ public class MonsterMover {
         int x;
         int y;
         for (Character c : monsters) {
-            if (tries > Math.pow(g.getMap().getSize() * 2, 2)) {
+            if (tries > Math.pow(game.getMap().getSize() * 2, 2)) {
                 //should throw an exception methinks
                 break;
             }
-            x = r.nextInt(g.getMap().getSize() - 1);
-            y = r.nextInt(g.getMap().getSize() - 1);
-            if (g.checkIfPassableCoordinate(x, y)) {
-                g.moveTo(c, x, y);
+            x = r.nextInt(game.getMap().getSize() - 1);
+            y = r.nextInt(game.getMap().getSize() - 1);
+            if (game.checkIfPassableCoordinate(x, y)) {
+                game.moveTo(c, x, y);
             }
         }
     }
@@ -36,9 +36,9 @@ public class MonsterMover {
         while (true) {
             x = r.nextInt(3) + c.getX() - 1;
             y = r.nextInt(3) + c.getY() - 1;
-            if (g.checkIfPassableCoordinate(x, y)) {
-                if (!g.checkIfInhabitedCoordinate(x, y)) {
-                    g.moveTo(c, x, y);
+            if (game.checkIfPassableCoordinate(x, y)) {
+                if (!game.checkIfInhabitedCoordinate(x, y)) {
+                    game.moveTo(c, x, y);
                     break;
                 }
             }
