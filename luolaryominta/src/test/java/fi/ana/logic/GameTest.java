@@ -1,145 +1,140 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fi.ana.logic;
 
+import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author katantti
- */
 public class GameTest {
 
-    Game g;
+    Game game;
 
     @Before
     public void setUp() {
-        g = new Game();
+        game = new Game();
     }
 
     @Test
     public void constructorTest() {
-        assertEquals(0, g.getPlayer().getX());
-        assertEquals(0, g.getPlayer().getX());
-        assertEquals(3, g.getPlayer().getType());
-        assertNotNull(g.getMap());
+        assertEquals(0, game.getPlayer().getX());
+        assertEquals(0, game.getPlayer().getX());
+        assertEquals(3, game.getPlayer().getType());
+        assertNotNull(game.getMap());
     }
 
     @Test
     public void mapBigEnoughForTests() {
-        assertTrue(g.getMap().getSize() >= 2);
-    }
-
-    @Test
-    public void textCommandMoveTest1() {
-        g.interpretCommand("d");
-        assertEquals(1, g.getPlayer().getX());
-
-    }
-
-    @Test
-    public void textCommandMoveTest2() {
-        g.interpretCommand("d");
-        g.interpretCommand("d");
-        g.interpretCommand("a");
-        assertEquals(1, g.getPlayer().getX());
-    }
-
-    @Test
-    public void textCommandMoveTest3() {
-        g.interpretCommand("s");
-        assertEquals(1, g.getPlayer().getY());
-    }
-
-    @Test
-    public void textCommandMoveTest4() {
-        g.interpretCommand("s");
-        g.interpretCommand("s");
-        g.interpretCommand("w");
-        assertEquals(1, g.getPlayer().getY());
+        assertTrue(game.getMap().getSize() >= 2);
     }
     
     @Test
-    public void textCommandMoveLimitsTest1() {
-        g.interpretCommand("a");
-        assertEquals(0, g.getPlayer().getX());
+    public void startPlayerLocationTest() {
+        game.start(0);
+        assertEquals(0, game.getPlayer().getX());
+        assertEquals(0, game.getPlayer().getY());
     }
     
     @Test
-    public void textCommandMoveLimitsTest2() {
-        g.interpretCommand("w");
-        assertEquals(0, g.getPlayer().getY());
+    public void startMonstersSpawnedTest() {
+        game.start(4);
+        int sum = 0;
+        for (int y = 0; y < game.getMap().getSize(); y++) {
+            for (int x = 0; x < game.getMap().getSize(); x++) {
+                if (game.getMap().getValue(x, y) == 2) {
+                    sum++;
+                }
+            }
+        }
+        assertEquals(4, sum);
+    }
+    
+    @Test
+    public void initializeMonstersTest1() {
+        List<Character> list = game.initializeMonsters(5);
+        assertEquals(5, list.size());
     }
 
     @Test
     public void moveByLimitsTest1() {
-        g.moveBy(g.getPlayer(), g.getMap().getSize() + 10, 0);
-        assertEquals(0, g.getPlayer().getX());
+        game.moveBy(game.getPlayer(), game.getMap().getSize() + 10, 0);
+        assertEquals(0, game.getPlayer().getX());
 
     }
 
     @Test
     public void moveByLimitsTest2() {
-        g.moveBy(g.getPlayer(), 0, g.getMap().getSize() + 10);
-        assertEquals(0, g.getPlayer().getY());
+        game.moveBy(game.getPlayer(), 0, game.getMap().getSize() + 10);
+        assertEquals(0, game.getPlayer().getY());
     }
 
     @Test
     public void moveByLimitsTest3() {
-        g.moveBy(g.getPlayer(), 0, -1 * g.getMap().getSize() - 10);
-        assertEquals(0, g.getPlayer().getY());
+        game.moveBy(game.getPlayer(), 0, -1 * game.getMap().getSize() - 10);
+        assertEquals(0, game.getPlayer().getY());
     }
 
     @Test
     public void moveByLimitsTest4() {
-        g.moveBy(g.getPlayer(), -1 * g.getMap().getSize() - 10, 0);
-        assertEquals(0, g.getPlayer().getX());
+        game.moveBy(game.getPlayer(), -1 * game.getMap().getSize() - 10, 0);
+        assertEquals(0, game.getPlayer().getX());
     }
 
     @Test
     public void moveByTest1() {
-        for (int i = 0; i < g.getMap().getSize(); i++) {
-            g.moveBy(g.getPlayer(), 1, 0);
+        for (int i = 0; i < game.getMap().getSize(); i++) {
+            game.moveBy(game.getPlayer(), 1, 0);
         }
-        assertEquals(g.getMap().getSize() - 1, g.getPlayer().getX());
+        assertEquals(game.getMap().getSize() - 1, game.getPlayer().getX());
     }
 
     @Test
     public void moveByTest2() {
-        for (int i = 0; i < g.getMap().getSize(); i++) {
-            g.moveBy(g.getPlayer(), 0, 1);
+        for (int i = 0; i < game.getMap().getSize(); i++) {
+            game.moveBy(game.getPlayer(), 0, 1);
         }
-        assertEquals(g.getMap().getSize() - 1, g.getPlayer().getY());
+        assertEquals(game.getMap().getSize() - 1, game.getPlayer().getY());
     }
 
     @Test
     public void moveByTest3() {
-        g.moveBy(g.getPlayer(), g.getMap().getSize() - 1, 0);
-        assertEquals(g.getMap().getSize() - 1, g.getPlayer().getX());
+        game.moveBy(game.getPlayer(), game.getMap().getSize() - 1, 0);
+        assertEquals(game.getMap().getSize() - 1, game.getPlayer().getX());
     }
 
     @Test
     public void moveByTest4() {
-        g.moveBy(g.getPlayer(), 0, g.getMap().getSize() - 1);
-        assertEquals(g.getMap().getSize() - 1, g.getPlayer().getY());
+        game.moveBy(game.getPlayer(), 0, game.getMap().getSize() - 1);
+        assertEquals(game.getMap().getSize() - 1, game.getPlayer().getY());
     }
 
     @Test
     public void moveToTest1() {
-        g.moveTo(g.getPlayer(), 2, 1);
-        assertEquals(g.getPlayer().getX(), 2);
-        assertEquals(g.getPlayer().getY(), 1);
+        game.moveTo(game.getPlayer(), 2, 1);
+        assertEquals(game.getPlayer().getX(), 2);
+        assertEquals(game.getPlayer().getY(), 1);
     }
 
     @Test
     public void moveToTest2() {
-        g.moveTo(g.getPlayer(), g.getMap().getSize() / 2, g.getMap().getSize() / 2);
-        assertEquals(g.getMap().getSize() / 2, g.getPlayer().getX());
-        assertEquals(g.getMap().getSize() / 2, g.getPlayer().getY());
+        game.moveTo(game.getPlayer(), game.getMap().getSize() / 2, game.getMap().getSize() / 2);
+        assertEquals(game.getMap().getSize() / 2, game.getPlayer().getX());
+        assertEquals(game.getMap().getSize() / 2, game.getPlayer().getY());
+    }
+    
+    @Test
+    public void checkIfPassableCoordinateTest() {
+        game.getMap().setValue(0, 0, 1);
+        assertTrue(!game.checkIfPassableCoordinate(0, 0));
+        game.getMap().setValue(0, 0, 0);
+        assertTrue(game.checkIfPassableCoordinate(0, 0));
+    }
+    
+    @Test 
+    public void checkIfInhabitedCoordinate() {
+        game.moveTo(game.getPlayer(), 0, 0);
+        assertTrue(game.checkIfInhabitedCoordinate(0, 0));
+        game.moveTo(game.getPlayer(), 1, 0);
+        assertTrue(!game.checkIfInhabitedCoordinate(0, 0));
     }
 }

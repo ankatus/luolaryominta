@@ -13,7 +13,6 @@ public class MapMakerTest {
 
     @Before
     public void setUp() {
-        mm = new MapMaker();
     }
 
     @Test

@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 import java.util.*;
 import org.junit.Before;
 
-public class MapTest {
+public class GameMapTest {
 
     private GameMap map;
     
-    public MapTest() {
+    public GameMapTest() {
     }
 
     @Before
