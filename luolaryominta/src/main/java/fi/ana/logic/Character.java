@@ -42,15 +42,7 @@ public class Character {
         this.y = y;
     }
 
-    public boolean takeDamage(int value) {
-        if (value < 0) {
-            return false;
-        }
-        if (value > hp) {
-            hp = 0;
-            return true;
-        }
-        hp -= value;
-        return true;
+    public void setHP(int hp) {
+        this.hp = hp;
     }
 }

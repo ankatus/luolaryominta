@@ -1,12 +1,13 @@
 
+        
 package fi.ana.main;
 import fi.ana.gui.*;
+import fi.ana.logic.Game;
 public class Main {
 
     public static void main(String[] args) {
-        // TODO code application logic here
-        TextUI ui = new TextUI();
-        ui.run();
+        Game game = new Game();
+        game.start(5);
     }
     
 }

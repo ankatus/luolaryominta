@@ -8,9 +8,9 @@ public class MonsterMover {
     private Game g;
     private Random r;
 
-    public MonsterMover(Game g) {
+    public MonsterMover(Game game) {
         r = new Random();
-        this.g = g;
+        this.g = game;
     }
 
     public void arrangeMonstersRandomly(List<Character> monsters) {
@@ -29,19 +29,15 @@ public class MonsterMover {
             }
         }
     }
-    
-    public void moveRandomly(Character c, boolean canRunIntoWalls) {
+
+    public void moveRandomly(Character c) {
         int x;
         int y;
-        if (canRunIntoWalls) {
+        while (true) {
             x = r.nextInt(3) + c.getX() - 1;
             y = r.nextInt(3) + c.getY() - 1;
-            g.moveTo(c, x, y);
-        } else {
-            while (true) {
-                x = r.nextInt(3) + c.getX() - 1;
-                y = r.nextInt(3) + c.getY() - 1;
-                if (g.checkIfPassableCoordinate(x, y)) {
+            if (g.checkIfPassableCoordinate(x, y)) {
+                if (!g.checkIfInhabitedCoordinate(x, y)) {
                     g.moveTo(c, x, y);
                     break;
                 }
