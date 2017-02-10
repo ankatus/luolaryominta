@@ -2,12 +2,12 @@ package fi.ana.logic;
 
 import java.util.*;
 
-public class MapMaker {
+public final class MapMaker {
 
-    public MapMaker() {
+    private MapMaker() {
     }
 
-    public GameMap makeDefaultMap() {
+    public static GameMap makeDefaultMap() {
         List<Integer> l = new ArrayList<>();
         l.add(0);
         l.add(1);
@@ -19,13 +19,13 @@ public class MapMaker {
         return map;
     }
 
-    private void populateRow(GameMap map, int row, int start, int end, int value) {
+    private static void populateRow(GameMap map, int row, int start, int end, int value) {
         for (int i = start; i <= end; i++) {
             map.setValue(i, row, value);
         }
     }
 
-    private void populateColumn(GameMap map, int column, int top, int bottom, int value) {
+    private static void populateColumn(GameMap map, int column, int top, int bottom, int value) {
         for (int i = top; i <= bottom; i++) {
             map.setValue(column, i, value);
         }
