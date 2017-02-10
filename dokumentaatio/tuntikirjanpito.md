@@ -7,4 +7,6 @@ Päivä | Tunnit | Kuvaus
 27.01.2017 | 3,0h | Lisää luokkia, ensimmäiset testit
 02.02.2017 | 3,5h | Alkeellinen käyttöliittymä testausta varten, liikkumislogiikkaa
 03.02.2017 | 4,0h | Testit pienempiin metodeihin, hirviöiden liikkumislogiikkaa
+08.02.2017 | 3,0h | Oikean käyttöliittymän luonnin kokeilua
+10.02.2017 | 4,0h | Parempi yritys käyttöliittymän luontiin, logiikkaluokkien muuttelua yhteensopiviksi
 ... | ... | ...
