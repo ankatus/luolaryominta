@@ -3,6 +3,11 @@ package fi.ana.logic;
 import java.util.Random;
 import java.util.List;
 
+/**
+ * Handles monster moving.
+ * 
+ */
+
 public class MonsterMover {
 
     private Game game;

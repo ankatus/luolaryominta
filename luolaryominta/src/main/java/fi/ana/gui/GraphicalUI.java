@@ -9,6 +9,11 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
+/**
+ * 
+ * Creates the UI in which the game runs.
+ */
+
 public class GraphicalUI implements Runnable {
 
     private Game game;
@@ -22,6 +27,9 @@ public class GraphicalUI implements Runnable {
         return frame;
     }
 
+    /**
+     * Starts the UI.
+     */
     @Override
     public void run() {
         frame = new JFrame("Game");
@@ -52,6 +60,9 @@ public class GraphicalUI implements Runnable {
         container.add(restart, BorderLayout.SOUTH);
     }
 
+    /**
+     * Calls the repaint() method on the UI's JFrame object.
+     */
     public void repaintFrame() {
         frame.repaint();
     }

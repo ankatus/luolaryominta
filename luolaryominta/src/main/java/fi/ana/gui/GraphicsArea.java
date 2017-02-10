@@ -6,6 +6,11 @@ import javax.swing.JPanel;
 import fi.ana.logic.Character;
 import fi.ana.logic.Game;
 
+/**
+ * 
+ * Draws the graphical representation of the game.
+ */
+
 public class GraphicsArea extends JPanel {
 
     Game game;
@@ -21,6 +26,10 @@ public class GraphicsArea extends JPanel {
         drawMap(g);
     }
 
+    /**
+     * Draws an appropriately coloured square for each coordinate in the GameMap.
+     * @param g 
+     */
     public void drawMap(Graphics g) {
         for (int y = 0; y < game.getMap().getSize(); y++) {
             for (int x = 0; x < game.getMap().getSize(); x++) {
@@ -30,6 +39,12 @@ public class GraphicsArea extends JPanel {
         }
     }
 
+    
+    /**
+     * Translates integers contained in the GameMap object into colours.
+     * @param type integer from the game's GameMap.
+     * @return interpreted colour.
+     */
     public Color interpretColor(int type) {
         switch (type) {
             case 0:

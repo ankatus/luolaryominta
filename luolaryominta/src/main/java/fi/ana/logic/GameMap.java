@@ -1,7 +1,10 @@
 package fi.ana.logic;
 
 import java.util.*;
-
+/**
+ * Contains the game's map grid in a two-dimensional array.
+ * Might be changed to contain an array of coordinate-objects instead.
+ */
 public class GameMap {
 
     private int[][] mapValues;

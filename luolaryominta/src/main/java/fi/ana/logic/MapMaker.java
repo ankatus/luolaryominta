@@ -2,6 +2,11 @@ package fi.ana.logic;
 
 import java.util.*;
 
+
+/**
+ * Contains static methods to create a GameMap object.
+ * 
+ */
 public final class MapMaker {
 
     private MapMaker() {
