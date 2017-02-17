@@ -14,8 +14,7 @@ public class MoveDown extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        game.moveBy(game.getPlayer(), 0, 1);
-        game.proceed();
+        game.proceed(0, 1);
     }
 
 }
