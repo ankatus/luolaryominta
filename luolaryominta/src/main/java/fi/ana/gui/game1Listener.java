@@ -9,11 +9,11 @@ import fi.ana.logic.Game;
  * ActionListener for the restart button.
  */
 
-public class RestartListener implements ActionListener {
+public class game1Listener implements ActionListener {
 
     private Game game;
 
-    public RestartListener(Game game) {
+    public game1Listener(Game game) {
         this.game = game;
     }
 
@@ -23,7 +23,7 @@ public class RestartListener implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        game.restart();
+        game.game1();
 
     }
 
