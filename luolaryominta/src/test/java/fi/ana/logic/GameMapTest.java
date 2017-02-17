@@ -14,10 +14,7 @@ public class GameMapTest {
 
     @Before
     public void setUp() {
-        List<Integer> l = new ArrayList<>();
-        l.add(0);
-        l.add(1);
-        map = new GameMap(10, l);
+        map = new GameMap(10);
     }
 
     @Test
