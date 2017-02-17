@@ -22,27 +22,28 @@ public class Game {
         gui = new GraphicalUI(this);
         monsters = new ArrayList<>();
         monsterMover = new MonsterMover(this);
-        map = MapMaker.makeDefaultMap();
-        player = new Character(0, 0, 0, 3);
     }
     
     /**
      * Starts the game.
-     * @param howManyMonsters How many monsters will be spawned.
      */
-    public void start(int howManyMonsters) {
+    public void start() {
         gui.run();
-        monsters = initializeMonsters(howManyMonsters);
-        monsterMover.arrangeMonstersRandomly(monsters);
-        moveBy(player, 0, 0);
     }
 
     /**
      * Moves the game ahead one turn.
      */
-    public void proceed() {
+    public void proceed(int x, int y) {
+        if (checkIfInhabitedCoordinate(player.getX() + x, player.getY() + y)) {
+            if (!resolveCombat(player.getX() + x, player.getY() + y)) {
+                System.exit(0);
+            }
+            gui.setTextToHpArea("HP: " + player.getHp());
+        }
+        moveBy(player, x, y);
         moveMonstersRandomly();
-        gui.repaintFrame();
+        gui.refresh();
     }
 
     public Character getPlayer() {
@@ -52,13 +53,34 @@ public class Game {
     /**
      * Restarts the game, setting all values back to default and re-randomising monster locations.
      */
-    public void restart() {
-        map = MapMaker.makeDefaultMap();
-        monsters = initializeMonsters(5);
+    public void game1() {
+        map = MapMaker.makeGame1Map();
+        monsters = initializeMonsters(1);
         monsterMover.arrangeMonstersRandomly(monsters);
-        player = new Character(0, 0, 0, 3);
-        moveBy(player, 0, 0);
-        gui.repaintFrame();
+        player = new Character(1, 1, 1, 3);
+        moveBy(player, 1, 1);
+        gui.setTextToHpArea("HP: " + player.getHp());
+        gui.refresh();
+    }
+    
+    public void game2() {
+        map = MapMaker.makeGame2Map();
+        monsters = initializeMonsters(2);
+        monsterMover.arrangeMonstersRandomly(monsters);
+        player = new Character(1, 1, 2, 3);
+        moveBy(player, 1, 1);
+        gui.setTextToHpArea("HP: " + player.getHp());
+        gui.refresh();
+    }
+    
+    public void game3() {
+        map = MapMaker.makeGame3Map();
+        monsters = initializeMonsters(3);
+        monsterMover.arrangeMonstersRandomly(monsters);
+        player = new Character(1, 1, 3, 3);
+        moveBy(player, 1, 1);
+        gui.setTextToHpArea("HP: " + player.getHp());
+        gui.refresh();
     }
 
     public GameMap getMap() {
@@ -136,7 +158,7 @@ public class Game {
     public List<Character> initializeMonsters(int howMany) {
         List<Character> monsters = new ArrayList<>();
         for (int i = 0; i < howMany; i++) {
-            monsters.add(new Character(0, 0, 5, 2));
+            monsters.add(new Character(-1, -1, 1, 2));
         }
         return monsters;
     }
@@ -148,5 +170,20 @@ public class Game {
         for (Character c : monsters) {
             monsterMover.moveRandomly(c);
         }
+    }
+    
+    public boolean resolveCombat(int x, int y) {
+        for (int i = 0; i < monsters.size(); i++) {
+            if (monsters.get(i).getX() == x && monsters.get(i).getY() == y) {
+                if (monsters.get(i).getHp() < player.getHp()) {
+                    player.setHP(player.getHp() - monsters.get(i).getHp());
+                    monsters.remove(i);
+                } else {
+                    return false;
+                }
+            }
+        }
+        map.setValue(x, y, 0);
+        return true;
     }
 }
