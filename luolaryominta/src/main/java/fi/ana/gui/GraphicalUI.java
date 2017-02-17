@@ -18,6 +18,7 @@ public class GraphicalUI implements Runnable {
 
     private Game game;
     private JFrame frame;
+    private JTextArea hpArea;
 
     public GraphicalUI(Game game) {
         this.game = game;
@@ -26,6 +27,10 @@ public class GraphicalUI implements Runnable {
     public JFrame getFrame() {
         return frame;
     }
+    
+    public void setTextToHpArea(String s) {
+        hpArea.setText(s);
+    }
 
     /**
      * Starts the UI.
@@ -33,7 +38,7 @@ public class GraphicalUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Game");
-        frame.setPreferredSize(new Dimension(375, 375));
+        frame.setPreferredSize(new Dimension(900, 700));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         createGameView(frame);
         createMenu(frame);
@@ -55,16 +60,32 @@ public class GraphicalUI implements Runnable {
     }
 
     public void createMenu(Container container) {
-        JButton restart = new JButton("Restart");
-        restart.addActionListener(new RestartListener(game));
-        container.add(restart, BorderLayout.SOUTH);
+        JPanel menu = new JPanel(new GridLayout(4, 0));
+        menu.setSize(new Dimension(100, frame.getHeight()));
+        JButton game1 = new JButton("game1");
+        JButton game2 = new JButton("game2");
+        JButton game3 = new JButton("game3");
+        hpArea = new JTextArea("");
+        hpArea.setFont(hpArea.getFont().deriveFont(24f));
+        game1.addActionListener(new game1Listener(game));
+        game2.addActionListener(new game2Listener(game));
+        game3.addActionListener(new game3Listener(game));
+        menu.add(game1);
+        menu.add(game2);
+        menu.add(game3);
+        menu.add(hpArea);
+        container.add(menu, BorderLayout.EAST);
     }
 
     /**
      * Calls the repaint() method on the UI's JFrame object.
      */
-    public void repaintFrame() {
+    public void refresh() {
         frame.repaint();
+    }
+    
+    public void resizeFrame(int x, int y) {
+        frame.setSize(new Dimension(x, y));
     }
 
 }
