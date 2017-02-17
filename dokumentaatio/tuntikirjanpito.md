@@ -9,4 +9,5 @@ Päivä | Tunnit | Kuvaus
 03.02.2017 | 4,0h | Testit pienempiin metodeihin, hirviöiden liikkumislogiikkaa
 08.02.2017 | 3,0h | Oikean käyttöliittymän luonnin kokeilua
 10.02.2017 | 4,0h | Parempi yritys käyttöliittymän luontiin, logiikkaluokkien muuttelua yhteensopiviksi
+17.02.2017 | 5,0h | Hahmojen välistä interaktiota, asetusnappuloita, javadoccia
 ... | ... | ...
