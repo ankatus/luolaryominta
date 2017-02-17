@@ -5,11 +5,11 @@ import java.util.*;
 import fi.ana.gui.GraphicalUI;
 
 /**
- * 
- * Handles all of the player movement logic, starts the UI, and acts as a hub for all the logic of the game.
- * Will be refactored to multiple classes at some point (probably).
+ *
+ * Handles all of the player movement logic, starts the UI, and acts as a hub
+ * for all the logic of the game. Will be refactored to multiple classes at some
+ * point (probably).
  */
-
 public class Game {
 
     private List<Character> monsters;
@@ -23,7 +23,7 @@ public class Game {
         monsters = new ArrayList<>();
         monsterMover = new MonsterMover(this);
     }
-    
+
     /**
      * Starts the game.
      */
@@ -51,34 +51,35 @@ public class Game {
     }
 
     /**
-     * Restarts the game, setting all values back to default and re-randomising monster locations.
+     * Restarts the game, setting all values back to default and re-randomising
+     * monster locations.
      */
     public void game1() {
         map = MapMaker.makeGame1Map();
+        player = new Character(1, 1, 1, 3);
         monsters = initializeMonsters(1);
         monsterMover.arrangeMonstersRandomly(monsters);
-        player = new Character(1, 1, 1, 3);
-        moveBy(player, 1, 1);
+        moveBy(player, 0, 0);
         gui.setTextToHpArea("HP: " + player.getHp());
         gui.refresh();
     }
-    
+
     public void game2() {
         map = MapMaker.makeGame2Map();
+        player = new Character(1, 1, 2, 3);
         monsters = initializeMonsters(2);
         monsterMover.arrangeMonstersRandomly(monsters);
-        player = new Character(1, 1, 2, 3);
-        moveBy(player, 1, 1);
+        moveBy(player, 0, 0);
         gui.setTextToHpArea("HP: " + player.getHp());
         gui.refresh();
     }
-    
+
     public void game3() {
         map = MapMaker.makeGame3Map();
+        player = new Character(1, 1, 3, 3);
         monsters = initializeMonsters(3);
         monsterMover.arrangeMonstersRandomly(monsters);
-        player = new Character(1, 1, 3, 3);
-        moveBy(player, 1, 1);
+        moveBy(player, 0, 0);
         gui.setTextToHpArea("HP: " + player.getHp());
         gui.refresh();
     }
@@ -89,6 +90,7 @@ public class Game {
 
     /**
      * Moves a Character object by the specified distance.
+     *
      * @param c Character to be moved.
      * @param x Distance to be moved laterally.
      * @param y Distance to be moved vertically.
@@ -105,6 +107,7 @@ public class Game {
 
     /**
      * Moves a Character object to the specified coordinate.
+     *
      * @param c Character to be moved.
      * @param x x-coordinate.
      * @param y y-coordinate.
@@ -121,9 +124,10 @@ public class Game {
 
     /**
      * Checks if the specified location is 1) on the map 2) not obstructed.
+     *
      * @param x x-coordinate.
      * @param y y-coordinate.
-     * @return 
+     * @return
      */
     public boolean checkIfPassableCoordinate(int x, int y) {
         if (!map.isValidCoordinate(x, y)) {
@@ -134,12 +138,13 @@ public class Game {
 
     /**
      * Checks if the specified location is currently inhabited by a Character.
+     *
      * @param x x-coordinate.
      * @param y y-coordinate.
-     * @return 
+     * @return
      */
     public boolean checkIfInhabitedCoordinate(int x, int y) {
-        if (player.getX() == x && player.getY() == y) {
+        if (player != null && player.getX() == x && player.getY() == y) {
             return true;
         }
         for (Character c : monsters) {
@@ -152,6 +157,7 @@ public class Game {
 
     /**
      * Fills the monsters list with Character objects.
+     *
      * @param howMany amount to be created.
      * @return filled list.
      */
@@ -171,7 +177,7 @@ public class Game {
             monsterMover.moveRandomly(c);
         }
     }
-    
+
     public boolean resolveCombat(int x, int y) {
         for (int i = 0; i < monsters.size(); i++) {
             if (monsters.get(i).getX() == x && monsters.get(i).getY() == y) {
