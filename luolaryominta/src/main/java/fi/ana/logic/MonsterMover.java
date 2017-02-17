@@ -17,6 +17,11 @@ public class MonsterMover {
         this.game = game;
     }
 
+    /**
+     * Moves all the characters in the input list to random positions.
+     * Characters cannot be moved out of bounds, in walls or on top of other characters.
+     * @param monsters 
+     */
     public void arrangeMonstersRandomly(List<Character> monsters) {
         int x;
         int y;
@@ -32,6 +37,10 @@ public class MonsterMover {
         }
     }
 
+    /**
+     * Moves a character in a random position around its current position.
+     * @param c 
+     */
     public void moveRandomly(Character c) {
         int x;
         int y;

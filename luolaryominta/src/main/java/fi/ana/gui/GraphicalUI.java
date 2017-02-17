@@ -10,24 +10,31 @@ import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
 /**
- * 
+ *
  * Creates the UI in which the game runs.
  */
-
 public class GraphicalUI implements Runnable {
 
     private Game game;
     private JFrame frame;
     private JTextArea hpArea;
 
+    /**
+     * Constructor.
+     * @param game 
+     */
     public GraphicalUI(Game game) {
         this.game = game;
     }
 
+    /**
+     * Returns the JFrame object belonging to this class.
+     * @return 
+     */
     public JFrame getFrame() {
         return frame;
     }
-    
+
     public void setTextToHpArea(String s) {
         hpArea.setText(s);
     }
@@ -46,7 +53,7 @@ public class GraphicalUI implements Runnable {
         frame.setVisible(true);
     }
 
-    public void createGameView(Container container) {
+    private void createGameView(Container container) {
         GraphicsArea ga = new GraphicsArea(game);
         ga.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0), "up");
         ga.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0), "right");
@@ -59,7 +66,7 @@ public class GraphicalUI implements Runnable {
         container.add(ga);
     }
 
-    public void createMenu(Container container) {
+    private void createMenu(Container container) {
         JPanel menu = new JPanel(new GridLayout(4, 0));
         menu.setSize(new Dimension(100, frame.getHeight()));
         JButton game1 = new JButton("game1");
@@ -67,9 +74,9 @@ public class GraphicalUI implements Runnable {
         JButton game3 = new JButton("game3");
         hpArea = new JTextArea("");
         hpArea.setFont(hpArea.getFont().deriveFont(24f));
-        game1.addActionListener(new game1Listener(game));
-        game2.addActionListener(new game2Listener(game));
-        game3.addActionListener(new game3Listener(game));
+        game1.addActionListener(new Game1Listener(game));
+        game2.addActionListener(new Game2Listener(game));
+        game3.addActionListener(new Game3Listener(game));
         menu.add(game1);
         menu.add(game2);
         menu.add(game3);
@@ -83,9 +90,4 @@ public class GraphicalUI implements Runnable {
     public void refresh() {
         frame.repaint();
     }
-    
-    public void resizeFrame(int x, int y) {
-        frame.setSize(new Dimension(x, y));
-    }
-
 }

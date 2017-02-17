@@ -5,10 +5,18 @@ import javax.swing.AbstractAction;
 
 import fi.ana.logic.Game;
 
+/**
+ * Action for moving the player character left.
+ * 
+ */
 public class MoveLeft extends AbstractAction {
 
     private Game game;
 
+    /**
+     * Constructor.
+     * @param game 
+     */
     public MoveLeft(Game game) {
         this.game = game;
     }

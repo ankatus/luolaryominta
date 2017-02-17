@@ -15,6 +15,10 @@ public class GraphicsArea extends JPanel {
 
     Game game;
 
+    /**
+     * Constructor.
+     * @param game 
+     */
     public GraphicsArea(Game game) {
         super.setBackground(Color.white);
         this.game = game;

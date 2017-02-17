@@ -6,21 +6,21 @@ import fi.ana.logic.Game;
 
 /**
  * 
- * ActionListener for the restart button.
+ * ActionListener for the game1 button.
  */
 
-public class game1Listener implements ActionListener {
+public class Game1Listener implements ActionListener {
 
     private Game game;
 
-    public game1Listener(Game game) {
+    /**
+     * Constructor.
+     * @param game 
+     */
+    public Game1Listener(Game game) {
         this.game = game;
     }
-
-    /**
-     * Restarts the game when the restart button is pressed.
-     * @param e 
-     */
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         game.game1();

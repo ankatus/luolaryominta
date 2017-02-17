@@ -4,10 +4,18 @@ import javax.swing.AbstractAction;
 import fi.ana.logic.Game;
 import java.awt.event.ActionEvent;
 
+/**
+ * Action for moving the player character up.
+ * 
+ */
 public class MoveUp extends AbstractAction {
 
     private Game game;
 
+    /**
+     * Constructor.
+     * @param game 
+     */
     public MoveUp(Game game) {
         this.game = game;
     }

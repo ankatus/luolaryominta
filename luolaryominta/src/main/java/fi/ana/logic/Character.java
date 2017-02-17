@@ -1,5 +1,9 @@
 package fi.ana.logic;
 
+/**
+ * Stores all the information related to a character.
+ * 
+ */
 public class Character {
 
     private int x;
