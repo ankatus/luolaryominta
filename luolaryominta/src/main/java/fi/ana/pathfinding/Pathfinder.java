@@ -61,26 +61,24 @@ public class Pathfinder {
             openList.remove(current);
             closedList.add(current);
             current = findLowestFCostCoordinate(openList);
-            openList.add(current);
 
         }
 
-        Path path = new Path(new ArrayList());
         PathfinderCoordinate addToPath = closedList.get(closedList.size() - 1);
         int index = closedList.size() - 1;
-        PathfinderCoordinate[] list = new PathfinderCoordinate[closedList.size()];
+        List<PathfinderCoordinate> list = new ArrayList();
+        
         while (true) {
-            list[index] = addToPath;
+            list.add(addToPath);
             if (addToPath.getParent() == null) {
                 break;
             }
             addToPath = addToPath.getParent();
-            index--;
         }
-        for (int i = list.length - 1; i >= 0; i--) {
-            path.add(list[i]);
-        }
-        return path;
+        
+        Collections.reverse(list);
+        list.remove(0);
+        return new Path(list);
 
     }
 
