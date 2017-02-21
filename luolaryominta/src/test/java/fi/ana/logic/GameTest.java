@@ -93,14 +93,14 @@ public class GameTest {
 
     @Test
     public void initializeMonstersTest1() {
-        List<Character> list = game.initializeMonsters(5);
+        List<GameCharacter> list = game.initializeMonsters(5);
         assertEquals(5, list.size());
     }
 
     @Test
     public void initializeMonstersTest2() {
-        List<Character> list = game.initializeMonsters(5);
-        for (Character c : list) {
+        List<GameCharacter> list = game.initializeMonsters(5);
+        for (GameCharacter c : list) {
             assertEquals(-1, c.getX());
             assertEquals(-1, c.getY());
             assertEquals(2, c.getType());

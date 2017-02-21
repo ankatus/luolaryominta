@@ -17,8 +17,8 @@ public final class MapMaker {
     public static GameMap makeSmallMap() {
         GameMap map = new GameMap(27);
         fillBorders(map);
-        fillRow(map, 7, 2, 15, 1);
-        fillColumn(map, 6, 3, 15, 1);
+        fillRow(map, 7, 2, 15);
+        fillColumn(map, 6, 3, 15);
         return map;
     }
 
@@ -29,8 +29,8 @@ public final class MapMaker {
     public static GameMap makeMediumMap() {
         GameMap map = new GameMap(35);
         fillBorders(map);
-        fillRow(map, 7, 2, 15, 1);
-        fillColumn(map, 6, 3, 15, 1);
+        fillRow(map, 7, 2, 15);
+        fillColumn(map, 6, 3, 15);
         return map;
     }
 
@@ -41,8 +41,8 @@ public final class MapMaker {
     public static GameMap makeLargeMap() {
         GameMap map = new GameMap(45);
         fillBorders(map);
-        fillRow(map, 7, 2, 15, 1);
-        fillColumn(map, 6, 3, 15, 1);
+        fillRow(map, 7, 2, 15);
+        fillColumn(map, 6, 3, 15);
         return map;
     }
 
@@ -51,10 +51,10 @@ public final class MapMaker {
      * @param map 
      */
     private static void fillBorders(GameMap map) {
-        fillRow(map, 0, 0, map.getSize() - 1, 1);
-        fillRow(map, map.getSize() - 1, 0, map.getSize() - 1, 1);
-        fillColumn(map, 0, 0, map.getSize() - 1, 1);
-        fillColumn(map, map.getSize() - 1, 0, map.getSize() - 1, 1);
+        fillRow(map, 0, 0, map.getSize() - 1);
+        fillRow(map, map.getSize() - 1, 0, map.getSize() - 1);
+        fillColumn(map, 0, 0, map.getSize() - 1);
+        fillColumn(map, map.getSize() - 1, 0, map.getSize() - 1);
     }
 
     /**
@@ -65,9 +65,9 @@ public final class MapMaker {
      * @param end
      * @param value 
      */
-    private static void fillRow(GameMap map, int row, int start, int end, int value) {
+    private static void fillRow(GameMap map, int row, int start, int end) {
         for (int i = start; i <= end; i++) {
-            map.setValue(i, row, value);
+            map.setValue(i, row, true);
         }
     }
 
@@ -79,9 +79,9 @@ public final class MapMaker {
      * @param end
      * @param value 
      */
-    private static void fillColumn(GameMap map, int column, int top, int bottom, int value) {
+    private static void fillColumn(GameMap map, int column, int top, int bottom) {
         for (int i = top; i <= bottom; i++) {
-            map.setValue(column, i, value);
+            map.setValue(column, i, true);
         }
     }
 

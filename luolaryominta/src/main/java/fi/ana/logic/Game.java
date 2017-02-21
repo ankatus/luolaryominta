@@ -12,8 +12,8 @@ import fi.ana.gui.GraphicalUI;
  */
 public class Game {
 
-    private List<Character> monsters;
-    private Character player;
+    private List<GameCharacter> monsters;
+    private GameCharacter player;
     private GameMap map;
     private MonsterMover monsterMover;
     private GraphicalUI gui;
@@ -42,12 +42,17 @@ public class Game {
             gui.setTextToHpArea("HP: " + player.getHp());
         }
         moveBy(player, x, y);
-        moveMonstersRandomly();
+        updateMonsterPaths();
+        moveMonsters();
         gui.refresh();
     }
 
-    public Character getPlayer() {
+    public GameCharacter getPlayer() {
         return player;
+    }
+    
+    public List<GameCharacter> getMonsters() {
+        return monsters;
     }
 
     /**
@@ -56,30 +61,33 @@ public class Game {
      */
     public void game1() {
         map = MapMaker.makeSmallMap();
-        player = new Character(1, 1, 1, 3);
+        player = new GameCharacter(1, 1, 1, 3);
         monsters = initializeMonsters(1);
         monsterMover.arrangeMonstersRandomly(monsters);
         moveBy(player, 0, 0);
+        gui.startGame();
         gui.setTextToHpArea("HP: " + player.getHp());
         gui.refresh();
     }
 
     public void game2() {
         map = MapMaker.makeMediumMap();
-        player = new Character(1, 1, 2, 3);
+        player = new GameCharacter(1, 1, 2, 3);
         monsters = initializeMonsters(2);
         monsterMover.arrangeMonstersRandomly(monsters);
         moveBy(player, 0, 0);
+        gui.startGame();
         gui.setTextToHpArea("HP: " + player.getHp());
         gui.refresh();
     }
 
     public void game3() {
         map = MapMaker.makeLargeMap();
-        player = new Character(1, 1, 3, 3);
+        player = new GameCharacter(1, 1, 3, 3);
         monsters = initializeMonsters(3);
         monsterMover.arrangeMonstersRandomly(monsters);
         moveBy(player, 0, 0);
+        gui.startGame();
         gui.setTextToHpArea("HP: " + player.getHp());
         gui.refresh();
     }
@@ -95,14 +103,12 @@ public class Game {
      * @param x Distance to be moved laterally.
      * @param y Distance to be moved vertically.
      */
-    public void moveBy(Character c, int x, int y) {
+    public void moveBy(GameCharacter c, int x, int y) {
         if (!checkIfPassableCoordinate(c.getX() + x, c.getY() + y)) {
             return;
         }
-        map.setValue(c.getX(), c.getY(), 0);
         c.setX(c.getX() + x);
         c.setY(c.getY() + y);
-        map.setValue(c.getX(), c.getY(), c.getType());
     }
 
     /**
@@ -112,14 +118,12 @@ public class Game {
      * @param x x-coordinate.
      * @param y y-coordinate.
      */
-    public void moveTo(Character c, int x, int y) {
+    public void moveTo(GameCharacter c, int x, int y) {
         if (!checkIfPassableCoordinate(x, y)) {
             return;
         }
-        map.setValue(c.getX(), c.getY(), 0);
         c.setX(x);
         c.setY(y);
-        map.setValue(c.getX(), c.getY(), c.getType());
     }
 
     /**
@@ -133,7 +137,7 @@ public class Game {
         if (!map.isValidCoordinate(x, y)) {
             return false;
         }
-        return map.getValue(x, y) != 1;
+        return !map.getValue(x, y);
     }
 
     /**
@@ -147,7 +151,7 @@ public class Game {
         if (player != null && player.getX() == x && player.getY() == y) {
             return true;
         }
-        for (Character c : monsters) {
+        for (GameCharacter c : monsters) {
             if (c.getX() == x && c.getY() == y) {
                 return true;
             }
@@ -161,10 +165,10 @@ public class Game {
      * @param howMany amount to be created.
      * @return filled list.
      */
-    public List<Character> initializeMonsters(int howMany) {
-        List<Character> monsters = new ArrayList<>();
+    public List<GameCharacter> initializeMonsters(int howMany) {
+        List<GameCharacter> monsters = new ArrayList<>();
         for (int i = 0; i < howMany; i++) {
-            monsters.add(new Character(-1, -1, 1, 2));
+            monsters.add(new GameCharacter(-1, -1, 1, 2));
         }
         return monsters;
     }
@@ -173,8 +177,20 @@ public class Game {
      * Calls the MonsterMover class's moveRandomly()-method for every monster.
      */
     public void moveMonstersRandomly() {
-        for (Character c : monsters) {
+        for (GameCharacter c : monsters) {
             monsterMover.moveRandomly(c);
+        }
+    }
+    
+    public void updateMonsterPaths() {
+        for (GameCharacter monster : monsters) {
+            monsterMover.getNewPath(monster);
+        }
+    }
+    
+    public void moveMonsters() {
+        for (GameCharacter monster : monsters) {
+            monsterMover.moveOnPath(monster);
         }
     }
 
@@ -189,7 +205,6 @@ public class Game {
                 }
             }
         }
-        map.setValue(x, y, 0);
         return true;
     }
 }

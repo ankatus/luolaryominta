@@ -6,10 +6,10 @@ package fi.ana.logic;
  */
 public class GameMap {
 
-    private int[][] mapValues;
+    private boolean[][] mapValues;
 
     public GameMap(int size) {
-        mapValues = new int[size][size];
+        mapValues = new boolean[size][size];
     }
 
     public int getSize() {
@@ -23,16 +23,13 @@ public class GameMap {
      * @param y
      * @param value 
      */
-    public void setValue(int x, int y, int value) {
-
-        if (value < 0 || value > 4) {
-            return;
-        } 
+    public void setValue(int x, int y, boolean wall) {
+        
         if (!isValidCoordinate(x, y)) {
             return;
         }
 
-        mapValues[y][x] = value;
+        mapValues[y][x] = wall;
     }
 
     /**
@@ -42,10 +39,10 @@ public class GameMap {
      * @param y
      * @return 
      */
-    public int getValue(int x, int y) {
+    public boolean getValue(int x, int y) {
         
         if (!isValidCoordinate(x, y)) {
-            return -1;
+            return false;
         }
         
         return mapValues[y][x];
@@ -75,7 +72,7 @@ public class GameMap {
     public void clear() {
         for (int i = 0; i < mapValues.length; i++) {
             for (int j = 0; j < mapValues.length; j++) {
-                mapValues[i][j] = 0;
+                mapValues[i][j] = false;
             }
         }
     }

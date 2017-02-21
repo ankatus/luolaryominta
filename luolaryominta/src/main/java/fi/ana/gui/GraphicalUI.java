@@ -47,7 +47,7 @@ public class GraphicalUI implements Runnable {
         frame = new JFrame("Game");
         frame.setPreferredSize(new Dimension(900, 700));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        createGameView(frame);
+        createStartScreen(frame);
         createMenu(frame);
         frame.pack();
         frame.setVisible(true);
@@ -63,9 +63,14 @@ public class GraphicalUI implements Runnable {
         ga.getActionMap().put("right", new MoveRight(game));
         ga.getActionMap().put("down", new MoveDown(game));
         ga.getActionMap().put("left", new MoveLeft(game));
-        container.add(ga);
+        container.add(ga, 0);
     }
 
+    private void createStartScreen(Container container) {
+        StartScreen startScreen = new StartScreen();
+        container.add(startScreen);
+    }
+    
     private void createMenu(Container container) {
         JPanel menu = new JPanel(new GridLayout(4, 0));
         menu.setSize(new Dimension(100, frame.getHeight()));
@@ -89,5 +94,10 @@ public class GraphicalUI implements Runnable {
      */
     public void refresh() {
         frame.repaint();
+    }
+    
+    public void startGame() {
+        frame.getContentPane().remove(0);
+        createGameView(frame);
     }
 }

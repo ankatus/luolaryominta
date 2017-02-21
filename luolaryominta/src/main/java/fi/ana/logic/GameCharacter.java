@@ -1,17 +1,18 @@
 package fi.ana.logic;
-
+import fi.ana.pathfinding.*;
 /**
  * Stores all the information related to a character.
  * 
  */
-public class Character {
+public class GameCharacter {
 
     private int x;
     private int y;
     private int hp;
     private int type;
+    private Path path;
     
-    public Character(int x, int y, int hp, int type) {
+    public GameCharacter(int x, int y, int hp, int type) {
         this.x = x;
         this.y = y;
         this.hp = hp;
@@ -33,6 +34,10 @@ public class Character {
     public int getHp() {
         return hp;
     }
+    
+    public Path getPath() {
+        return path;
+    }
 
     public void setType(int type) {
         this.type = type;
@@ -48,5 +53,9 @@ public class Character {
 
     public void setHP(int hp) {
         this.hp = hp;
+    }
+    
+    public void setPath(Path path) {
+        this.path = path;
     }
 }

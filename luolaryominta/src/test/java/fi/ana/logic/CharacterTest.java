@@ -6,14 +6,14 @@ import static org.junit.Assert.*;
 
 public class CharacterTest {
 
-    private Character c;
+    private GameCharacter c;
 
     public CharacterTest() {
     }
 
     @Before
     public void setUp() {
-        c = new Character(1, 2, 3, 3);
+        c = new GameCharacter(1, 2, 3, 3);
     }
 
     @Test

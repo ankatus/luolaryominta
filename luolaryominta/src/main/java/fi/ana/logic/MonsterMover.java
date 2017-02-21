@@ -1,7 +1,9 @@
 package fi.ana.logic;
 
+import fi.ana.pathfinding.PathfinderCoordinate;
 import java.util.Random;
 import java.util.List;
+import fi.ana.pathfinding.*;
 
 /**
  * Handles monster moving.
@@ -22,10 +24,10 @@ public class MonsterMover {
      * Characters cannot be moved out of bounds, in walls or on top of other characters.
      * @param monsters 
      */
-    public void arrangeMonstersRandomly(List<Character> monsters) {
+    public void arrangeMonstersRandomly(List<GameCharacter> monsters) {
         int x;
         int y;
-        for (Character c : monsters) {
+        for (GameCharacter c : monsters) {
             while (true) {
                 x = r.nextInt(game.getMap().getSize() - 1);
                 y = r.nextInt(game.getMap().getSize() - 1);
@@ -41,7 +43,7 @@ public class MonsterMover {
      * Moves a character in a random position around its current position.
      * @param c 
      */
-    public void moveRandomly(Character c) {
+    public void moveRandomly(GameCharacter c) {
         int x;
         int y;
         while (true) {
@@ -54,5 +56,16 @@ public class MonsterMover {
                 }
             }
         }
+    }
+    
+    public void moveOnPath(GameCharacter monster) {
+        game.moveTo(monster, monster.getPath().getPathfinderCoordinate(0).getX(), monster.getPath().getPathfinderCoordinate(0).getY());
+        monster.getPath().remove(0);
+    }
+    
+    public void getNewPath(GameCharacter monster) {
+        PathfinderCoordinate start = new PathfinderCoordinate(monster.getX(), monster.getY(), null);
+        PathfinderCoordinate end = new PathfinderCoordinate(game.getPlayer().getX(), game.getPlayer().getY(), null);
+        monster.setPath(Pathfinder.findPath(start, end, game.getMap()));
     }
 }
