@@ -1,5 +1,5 @@
 **Aihe**: Luolaryömintäpeli. 
-Yhden pelaajan peli, jossa liikutetaan hahmoa neliöistä koostuvalla kentällä, "luolassa". Kenttä sisältää ainakin seiniä ja hirviöitä, sekä jonkinlaisen maalin joka päättää pelin.
+Yhden pelaajan peli, jossa liikutetaan hahmoa neliöistä koostuvalla kentällä, "luolassa". Kenttä sisältää ainakin seiniä ja hirviöitä.
 
 **Pelaajan toiminnot**: 
 - Hahmon liikuttaminen neljässä suunnassa.
@@ -10,7 +10,7 @@ Yhden pelaajan peli, jossa liikutetaan hahmoa neliöistä koostuvalla kentällä
 
 ![Luokkakaavio](luokkakaavio.png)  
 
-**Sekvenssikaavioita**  
+**(huonoja)Sekvenssikaavioita**  
 
 ![Pelimoodin valinta](sekvenssi1.png)  
 ![Hahmon liikuttaminen](sekvenssi2.png)
