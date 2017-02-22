@@ -3,6 +3,7 @@ package fi.ana.logic;
 import java.awt.event.KeyEvent;
 import java.util.*;
 import fi.ana.gui.GraphicalUI;
+import fi.ana.pathfinding.Path;
 
 /**
  *
@@ -13,14 +14,18 @@ import fi.ana.gui.GraphicalUI;
 public class Game {
 
     private List<GameCharacter> monsters;
+    private List<Item> items;
     private GameCharacter player;
     private GameMap map;
     private MonsterMover monsterMover;
     private GraphicalUI gui;
+    private int countdown;
+    private int turnCount;
 
     public Game() {
         gui = new GraphicalUI(this);
-        monsters = new ArrayList<>();
+        monsters = new ArrayList();
+        items = new ArrayList();
         monsterMover = new MonsterMover(this);
     }
 
@@ -35,24 +40,52 @@ public class Game {
      * Moves the game ahead one turn.
      */
     public void proceed(int x, int y) {
+        countdown--;
+        turnCount++;
+        gui.setTextTurnCountArea("Turn: " + turnCount);
         if (checkIfInhabitedCoordinate(player.getX() + x, player.getY() + y)) {
             if (!resolveCombat(player.getX() + x, player.getY() + y)) {
-                System.exit(0);
+                gui.setTextToHpArea("HP: " + player.getHp());
+                gui.endGame(turnCount);
             }
             gui.setTextToHpArea("HP: " + player.getHp());
         }
         moveBy(player, x, y);
-        updateMonsterPaths();
+        if (!resolveStackedItemAndPlayer()) {
+            gui.setTextToHpArea("HP: " + player.getHp());
+            gui.endGame(turnCount);
+        }
+        if (countdown % 1 == 0) {
+            updateMonsterPaths();
+        }
         moveMonsters();
+        if (!resolveStackedMonsterAndPlayer()) {
+            gui.setTextToHpArea("HP: " + player.getHp());
+            gui.endGame(turnCount);
+        }
+        gui.setTextToHpArea("HP: " + player.getHp());
+        if (countdown == 0) {
+            countdown = 20;
+            if (items.size() < 4) {
+                spawnHealthPack();
+            }
+            spawnMonster();
+
+        }
+        gui.setTextToCountdownArea("Spawn: " + countdown);
         gui.refresh();
     }
 
     public GameCharacter getPlayer() {
         return player;
     }
-    
+
     public List<GameCharacter> getMonsters() {
         return monsters;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 
     /**
@@ -60,35 +93,70 @@ public class Game {
      * monster locations.
      */
     public void game1() {
+        countdown = 10;
+        turnCount = 0;
         map = MapMaker.makeSmallMap();
         player = new GameCharacter(1, 1, 1, 3);
         monsters = initializeMonsters(1);
         monsterMover.arrangeMonstersRandomly(monsters);
+        items = initializeHealthPacks(1);
+        monsterMover.arrangeItemsRandomly(items);
         moveBy(player, 0, 0);
         gui.startGame();
         gui.setTextToHpArea("HP: " + player.getHp());
+        gui.setTextTurnCountArea("Turn: " + turnCount);
+        gui.setTextToCountdownArea("Spawn: " + countdown);
         gui.refresh();
     }
 
     public void game2() {
+        countdown = 10;
+        turnCount = 0;
         map = MapMaker.makeMediumMap();
         player = new GameCharacter(1, 1, 2, 3);
         monsters = initializeMonsters(2);
         monsterMover.arrangeMonstersRandomly(monsters);
+        items = initializeHealthPacks(2);
+        monsterMover.arrangeItemsRandomly(items);
         moveBy(player, 0, 0);
         gui.startGame();
         gui.setTextToHpArea("HP: " + player.getHp());
+        gui.setTextTurnCountArea("Turn: " + turnCount);
+        gui.setTextToCountdownArea("Spawn: " + countdown);
         gui.refresh();
     }
 
     public void game3() {
+        countdown = 10;
+        turnCount = 0;
         map = MapMaker.makeLargeMap();
         player = new GameCharacter(1, 1, 3, 3);
         monsters = initializeMonsters(3);
         monsterMover.arrangeMonstersRandomly(monsters);
+        items = initializeHealthPacks(3);
+        monsterMover.arrangeItemsRandomly(items);
         moveBy(player, 0, 0);
         gui.startGame();
         gui.setTextToHpArea("HP: " + player.getHp());
+        gui.setTextTurnCountArea("Turn: " + turnCount);
+        gui.setTextToCountdownArea("Spawn: " + countdown);
+        gui.refresh();
+    }
+    
+    public void randomGame() {
+        countdown = 10;
+        turnCount = 0;
+        map = MapMaker.makeRandomMap();
+        player = new GameCharacter(1, 1, 3, 3);
+        monsters = initializeMonsters(3);
+        monsterMover.arrangeMonstersRandomly(monsters);
+        items = initializeHealthPacks(3);
+        monsterMover.arrangeItemsRandomly(items);
+        moveBy(player, 0, 0);
+        gui.startGame();
+        gui.setTextToHpArea("HP: " + player.getHp());
+        gui.setTextTurnCountArea("Turn: " + turnCount);
+        gui.setTextToCountdownArea("Spawn: " + countdown);
         gui.refresh();
     }
 
@@ -181,13 +249,13 @@ public class Game {
             monsterMover.moveRandomly(c);
         }
     }
-    
+
     public void updateMonsterPaths() {
         for (GameCharacter monster : monsters) {
             monsterMover.getNewPath(monster);
         }
     }
-    
+
     public void moveMonsters() {
         for (GameCharacter monster : monsters) {
             monsterMover.moveOnPath(monster);
@@ -201,10 +269,50 @@ public class Game {
                     player.setHP(player.getHp() - monsters.get(i).getHp());
                     monsters.remove(i);
                 } else {
+                    player.setHP(player.getHp() - monsters.get(i).getHp());
+                    monsters.remove(i);
                     return false;
                 }
             }
         }
         return true;
+    }
+
+    public boolean resolveStackedMonsterAndPlayer() {
+        return resolveCombat(player.getX(), player.getY());
+    }
+
+    public boolean resolveStackedItemAndPlayer() {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getX() == player.getX() && items.get(i).getY() == player.getY()) {
+                if (!items.get(i).interact(player)) {
+                    return false;
+                }
+                items.remove(i);
+            }
+        }
+        return true;
+    }
+
+    public List<Item> initializeHealthPacks(int howMany) {
+        List<Item> returnList = new ArrayList();
+        for (int i = 0; i < howMany; i++) {
+            returnList.add(new HealthPack(-1, -1));
+        }
+        return returnList;
+    }
+
+    public void spawnMonster() {
+        ArrayList<GameCharacter> list = new ArrayList();
+        list.add(new GameCharacter(-1, -1, 1, 2));
+        monsterMover.arrangeMonstersRandomly(list);
+        monsters.addAll(list);
+    }
+
+    public void spawnHealthPack() {
+        ArrayList<Item> list = new ArrayList();
+        list.add(new HealthPack(-1, -1));
+        monsterMover.arrangeItemsRandomly(list);
+        items.addAll(list);
     }
 }

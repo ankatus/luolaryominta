@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import fi.ana.logic.GameCharacter;
 import fi.ana.logic.Game;
+import fi.ana.logic.Item;
 
 /**
  *
@@ -20,7 +21,7 @@ public class GraphicsArea extends JPanel {
      * @param game
      */
     public GraphicsArea(Game game) {
-        super.setBackground(Color.white);
+        super.setBackground(Color.GRAY);
         this.game = game;
     }
 
@@ -28,7 +29,7 @@ public class GraphicsArea extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawMap(g);
-        drawMonstersAndPlayer(g);
+        drawMonstersPlayerAndItems(g);
     }
 
     /**
@@ -42,7 +43,7 @@ public class GraphicsArea extends JPanel {
             for (int x = 0; x < game.getMap().getSize(); x++) {
                 if (game.getMap().getValue(x, y)) {
                     g.setColor(Color.BLACK);
-                    g.fillRect(x * 15, y * 15, 15, 15);
+                    g.fillRect(x * 15, y * 15, 14, 14);
                 } else {
                     g.setColor(Color.WHITE);
                     g.fillRect(x * 15, y * 15, 15, 15);
@@ -51,12 +52,16 @@ public class GraphicsArea extends JPanel {
         }
     }
     
-    public void drawMonstersAndPlayer(Graphics g) {
+    public void drawMonstersPlayerAndItems(Graphics g) {
         g.setColor(Color.RED);
         for (GameCharacter c : game.getMonsters()) {
-            g.fillRect(c.getX() * 15, c.getY() * 15, 15, 15);
+            g.fillRect(c.getX() * 15, c.getY() * 15, 14, 14);
         }
         g.setColor(Color.BLUE);
         g.fillRect(game.getPlayer().getX() * 15, game.getPlayer().getY() * 15, 15, 15);
+        g.setColor(Color.GREEN);
+        for (Item i : game.getItems()) {
+            g.fillRect(i.getX() * 15, i.getY() * 15, 15, 15);
+        }
     }
 }
