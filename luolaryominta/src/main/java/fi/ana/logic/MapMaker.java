@@ -8,13 +8,10 @@ import java.util.Random;
  */
 public final class MapMaker {
 
-    private MapMaker() {
-    }
-
     /**
      * Creates a small map.
      *
-     * @return
+     * @return map object.
      */
     public static GameMap makeSmallMap() {
         GameMap map = new GameMap(27);
@@ -29,7 +26,7 @@ public final class MapMaker {
     /**
      * Creates a medium map.
      *
-     * @return
+     * @return map object.
      */
     public static GameMap makeMediumMap() {
         GameMap map = new GameMap(35);
@@ -46,7 +43,7 @@ public final class MapMaker {
     /**
      * Creates a large map.
      *
-     * @return
+     * @return map object.
      */
     public static GameMap makeLargeMap() {
         GameMap map = new GameMap(45);
@@ -65,6 +62,10 @@ public final class MapMaker {
         return map;
     }
 
+    /**
+     * Creates a randomised map.
+     * @return map object.
+     */
     public static GameMap makeRandomMap() {
         GameMap map = new GameMap(45);
         fillBorders(map);
@@ -85,7 +86,7 @@ public final class MapMaker {
     /**
      * Fills the map's borders with walls.
      *
-     * @param map
+     * @param map map.
      */
     private static void fillBorders(GameMap map) {
         fillRow(map, 0, 0, map.getSize() - 1);
@@ -97,11 +98,11 @@ public final class MapMaker {
     /**
      * Changes a row of values on the map to the specified value.
      *
-     * @param map
-     * @param row
-     * @param start
-     * @param end
-     * @param value
+     * @param map map.
+     * @param row row.
+     * @param start start index on row.
+     * @param end end index on row.
+     * @param value true or false.
      */
     private static void fillRow(GameMap map, int row, int start, int end) {
         for (int i = start; i <= end; i++) {
@@ -112,11 +113,11 @@ public final class MapMaker {
     /**
      * Changes a column of values on the map to the specified value.
      *
-     * @param map
-     * @param row
-     * @param start
-     * @param end
-     * @param value
+     * @param map map.
+     * @param column column.
+     * @param start start index on the column.
+     * @param end end index on the column.
+     * @param value true or false.
      */
     private static void fillColumn(GameMap map, int column, int top, int bottom) {
         for (int i = top; i <= bottom; i++) {

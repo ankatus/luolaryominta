@@ -14,3 +14,6 @@ Yhden pelaajan peli, jossa liikutetaan hahmoa neliöistä koostuvalla kentällä
 
 ![Pelimoodin valinta](sekvenssi1.png)  
 ![Hahmon liikuttaminen](sekvenssi2.png)
+
+**Rakennekuvaus**
+Game-luokka on kaiken ydin ja aivan liian voimakas (pitäisi jakaa osiin). Se kommunikoi kaikkien logiikan osien kanssa, ja suorittaa hahmojen liikuttamiset sekä tallentaa pelin tilaan liittyvän tiedon (Kartta- ja hahmo-objektit). Game kommunikoi GraphicalUIn kanssa, joka taas toimii käyttöliittymän ytimenä. GraphicalUI kerää käyttöliittymän eri osat yhteen ja näyttää ne näytöllä. "Staattisia" luokkia on MapMaker ja Pathfinder, joista ensimmäinen luo erilaisia karttoja pelille ja jälkimmäinen toteuttaa reitinetsinnän hahmoille.

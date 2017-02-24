@@ -1,5 +1,9 @@
 package fi.ana.logic;
 
+import fi.ana.pathfinding.Path;
+import fi.ana.pathfinding.PathfinderCoordinate;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -46,5 +50,20 @@ public class CharacterTest {
     public void hpSetGetTest() {
         c.setHP(10);
         assertEquals(10, c.getHp());
+    }
+    
+    @Test
+    public void pathSetGetTest() {
+        List<PathfinderCoordinate> list = new ArrayList();
+        list.add(new PathfinderCoordinate(0, 0, null));
+        list.add(new PathfinderCoordinate(1, 2, list.get(0)));
+        Path path = new Path(list);
+        c.setPath(path);
+        assertEquals(0, c.getPath().getPathfinderCoordinate(0).getX());
+        assertEquals(0, c.getPath().getPathfinderCoordinate(0).getY());
+        assertNull(c.getPath().getPathfinderCoordinate(0).getParent());
+        assertEquals(1, c.getPath().getPathfinderCoordinate(1).getX());
+        assertEquals(2, c.getPath().getPathfinderCoordinate(1).getY());
+        assertEquals(c.getPath().getPathfinderCoordinate(0), c.getPath().getPathfinderCoordinate(1).getParent());
     }
 }

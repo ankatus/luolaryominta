@@ -15,7 +15,7 @@ public class Game1Listener implements ActionListener {
 
     /**
      * Constructor.
-     * @param game 
+     * @param game game.
      */
     public Game1Listener(Game game) {
         this.game = game;

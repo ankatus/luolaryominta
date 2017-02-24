@@ -21,7 +21,10 @@ public class Game {
     private GraphicalUI gui;
     private int countdown;
     private int turnCount;
-
+ 
+    /**
+     * Constructor.
+     */
     public Game() {
         gui = new GraphicalUI(this);
         monsters = new ArrayList();
@@ -37,7 +40,9 @@ public class Game {
     }
 
     /**
-     * Moves the game ahead one turn.
+     * Moves the game ahead one turn and moves the player.
+     * @param x amount of spaces the player should move on the x-axis.
+     * @param y amount of spaces the player should move on the y-axis.
      */
     public void proceed(int x, int y) {
         countdown--;
@@ -76,20 +81,32 @@ public class Game {
         gui.refresh();
     }
 
+    /**
+     * Returns the GameCharacter object associated with the player.
+     * @return GameCharacter object.
+     */
     public GameCharacter getPlayer() {
         return player;
     }
 
+    /**
+     * Returns a list of the GameCharacter objects associated with the monsters.
+     * @return GameCharacter object.
+     */
     public List<GameCharacter> getMonsters() {
         return monsters;
     }
 
+    /**
+     * Returns a list of objects that implement the Item-interface.
+     * @return A list of objects.
+     */
     public List<Item> getItems() {
         return items;
     }
 
     /**
-     * Restarts the game, setting all values back to default and re-randomising
+     * Starts game1, setting all values back to default and re-randomising
      * monster locations.
      */
     public void game1() {
@@ -109,6 +126,10 @@ public class Game {
         gui.refresh();
     }
 
+    /**
+     * Starts game2, setting all values back to default and re-randomising
+     * monster locations.
+     */
     public void game2() {
         countdown = 10;
         turnCount = 0;
@@ -126,6 +147,10 @@ public class Game {
         gui.refresh();
     }
 
+    /**
+     * Starts game2, setting all values back to default and re-randomising
+     * monster locations.
+     */
     public void game3() {
         countdown = 10;
         turnCount = 0;
@@ -143,6 +168,10 @@ public class Game {
         gui.refresh();
     }
     
+    /**
+     * Starts a random game, setting all values back to default and re-randomising
+     * monster locations. The map will be randomised.
+     */
     public void randomGame() {
         countdown = 10;
         turnCount = 0;
@@ -160,6 +189,10 @@ public class Game {
         gui.refresh();
     }
 
+    /**
+     * Returns the GameMap object currently used to store the game's map.
+     * @return a GameMap object.
+     */
     public GameMap getMap() {
         return map;
     }
@@ -199,7 +232,7 @@ public class Game {
      *
      * @param x x-coordinate.
      * @param y y-coordinate.
-     * @return
+     * @return true or false
      */
     public boolean checkIfPassableCoordinate(int x, int y) {
         if (!map.isValidCoordinate(x, y)) {
@@ -213,7 +246,7 @@ public class Game {
      *
      * @param x x-coordinate.
      * @param y y-coordinate.
-     * @return
+     * @return true or false
      */
     public boolean checkIfInhabitedCoordinate(int x, int y) {
         if (player != null && player.getX() == x && player.getY() == y) {
@@ -228,7 +261,7 @@ public class Game {
     }
 
     /**
-     * Fills the monsters list with Character objects.
+     * Fills the monsters list with GameCharacter objects.
      *
      * @param howMany amount to be created.
      * @return filled list.
@@ -242,26 +275,30 @@ public class Game {
     }
 
     /**
-     * Calls the MonsterMover class's moveRandomly()-method for every monster.
+     * Gets new paths for monsters to follow.
      */
-    public void moveMonstersRandomly() {
-        for (GameCharacter c : monsters) {
-            monsterMover.moveRandomly(c);
-        }
-    }
-
     public void updateMonsterPaths() {
         for (GameCharacter monster : monsters) {
             monsterMover.getNewPath(monster);
         }
     }
 
+    /**
+     * Moves monsters along their path.
+     */
     public void moveMonsters() {
         for (GameCharacter monster : monsters) {
             monsterMover.moveOnPath(monster);
         }
     }
 
+    /**
+     * Resolves what happens in "combat" between the player and a monster in the specified coordinates.
+     * Returns true if the player survives, false if they die
+     * @param x x-coordinate of monster to combat.
+     * @param y y-coordinate of monster to combat.
+     * @return true or false.
+     */
     public boolean resolveCombat(int x, int y) {
         for (int i = 0; i < monsters.size(); i++) {
             if (monsters.get(i).getX() == x && monsters.get(i).getY() == y) {
@@ -278,10 +315,18 @@ public class Game {
         return true;
     }
 
+    /**
+     * Calls the resolveCombat method on the player's coordinates.
+     * @return true or false.
+     */
     public boolean resolveStackedMonsterAndPlayer() {
         return resolveCombat(player.getX(), player.getY());
     }
 
+    /**
+     * Calls the interact()-method of any items stacked with the player.
+     * @return true or false;
+     */
     public boolean resolveStackedItemAndPlayer() {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getX() == player.getX() && items.get(i).getY() == player.getY()) {
@@ -294,6 +339,11 @@ public class Game {
         return true;
     }
 
+    /**
+     * Fills the items-list with HealthPack-objects.
+     * @param howMany how many objects to initialize.
+     * @return list of items.
+     */
     public List<Item> initializeHealthPacks(int howMany) {
         List<Item> returnList = new ArrayList();
         for (int i = 0; i < howMany; i++) {
@@ -302,6 +352,9 @@ public class Game {
         return returnList;
     }
 
+    /**
+     * Spawns a new monster at a random location.
+     */
     public void spawnMonster() {
         ArrayList<GameCharacter> list = new ArrayList();
         list.add(new GameCharacter(-1, -1, 1, 2));
@@ -309,6 +362,9 @@ public class Game {
         monsters.addAll(list);
     }
 
+    /**
+     * Spawns a new HealthPack at a random location.
+     */
     public void spawnHealthPack() {
         ArrayList<Item> list = new ArrayList();
         list.add(new HealthPack(-1, -1));

@@ -9,8 +9,7 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 /**
@@ -98,7 +97,8 @@ public class GraphicalUI implements Runnable {
     private void createGameOverScreen(Container container, int turns) {
         JPanel gameOver = new JPanel();
         try {
-            BufferedImage image = ImageIO.read(new File("youdied.png"));
+            InputStream is = getClass().getClassLoader().getResourceAsStream("youdied.png");
+            BufferedImage image = ImageIO.read(is);
             ImageIcon icon = new ImageIcon(image);
             JLabel label = new JLabel(icon);
             gameOver.add(label);

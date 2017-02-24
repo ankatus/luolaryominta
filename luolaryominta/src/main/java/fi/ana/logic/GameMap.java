@@ -2,12 +2,16 @@ package fi.ana.logic;
 
 /**
  * Contains the game's map grid in a two-dimensional array.
- * Might be changed to contain an array of coordinate-objects instead.
+ * 
  */
 public class GameMap {
 
     private boolean[][] mapValues;
 
+    /**
+     * Constructor.
+     * @param size map side length. 
+     */
     public GameMap(int size) {
         mapValues = new boolean[size][size];
     }
@@ -19,9 +23,9 @@ public class GameMap {
     /**
      * Sets the value in the specified position.
      * If the position is not on the map, does nothing.
-     * @param x
-     * @param y
-     * @param value 
+     * @param x x-coordinate.
+     * @param y y-coordinate.
+     * @param wall value.
      */
     public void setValue(int x, int y, boolean wall) {
         
@@ -34,10 +38,10 @@ public class GameMap {
 
     /**
      * Returns the value of the specified position.
-     * If the position is not on the map, returns -1.
-     * @param x
-     * @param y
-     * @return 
+     * If the position is not on the map, returns false.
+     * @param x x-coordinate.
+     * @param y y-coordinate.
+     * @return true or false.
      */
     public boolean getValue(int x, int y) {
         
@@ -50,9 +54,9 @@ public class GameMap {
 
     /**
      * Checks if the specified position is on the map.
-     * @param x
-     * @param y
-     * @return 
+     * @param x x-coordinate.
+     * @param y y-coordinate.
+     * @return true or false.
      */
     public boolean isValidCoordinate(int x, int y) {
 
@@ -67,7 +71,7 @@ public class GameMap {
     
     
     /**
-     * Sets all values to 0.
+     * Sets all values to false.
      */
     public void clear() {
         for (int i = 0; i < mapValues.length; i++) {

@@ -6,7 +6,7 @@
 package fi.ana.pathfinding;
 
 /**
- *
+ * Class for containing a single coordinate to be used in pathfinding.
  * @author katantti
  */
 public class PathfinderCoordinate {

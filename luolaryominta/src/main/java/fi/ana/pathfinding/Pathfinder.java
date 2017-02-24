@@ -3,8 +3,19 @@ package fi.ana.pathfinding;
 import fi.ana.logic.*;
 import java.util.*;
 
+/**
+ * Contains an implementation of the A* pathfinding algorithm.
+ * @author katantti
+ */
 public class Pathfinder {
 
+    /**
+     * Finds a path between the two specified coordinates.
+     * @param start starting coordinate.
+     * @param end end coordinate.
+     * @param map map to find path on.
+     * @return Path object.
+     */
     public static Path findPath(PathfinderCoordinate start, PathfinderCoordinate end, GameMap map) {
         ArrayList<PathfinderCoordinate> openList = new ArrayList();
         ArrayList<PathfinderCoordinate> closedList = new ArrayList();

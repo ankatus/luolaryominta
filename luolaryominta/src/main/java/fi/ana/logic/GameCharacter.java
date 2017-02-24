@@ -12,6 +12,13 @@ public class GameCharacter {
     private int type;
     private Path path;
     
+    /**
+     * Holds data associated with the characters in-game.
+     * @param x x-coordinate.
+     * @param y y-coordinate.
+     * @param hp hp.
+     * @param type type.
+     */
     public GameCharacter(int x, int y, int hp, int type) {
         this.x = x;
         this.y = y;

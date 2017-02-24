@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 15,
-             Errors: 25,
+      <title>File: 26,
+             Errors: 8,
              Warnings: 0,
              Infos: 0
       </title>
@@ -46,34 +46,6 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.ana.gui.GraphicalUI.java">fi/ana/gui/GraphicalUI.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  2
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#fi.ana.actions.MoveRight.java">fi/ana/actions/MoveRight.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="${project.url}/checkstyle.html#fi.ana.logic.Game.java">fi/ana/logic/Game.java</a>
                 </td>
                 <td>
@@ -83,7 +55,21 @@ under the License.
                   0
                 </td>
                 <td>
-                  8
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.pathfinding.Pathfinder.java">fi/ana/pathfinding/Pathfinder.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
               </tr>
                           <tr>
@@ -97,7 +83,21 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.actions.MoveNorthwest.java">fi/ana/actions/MoveNorthwest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
               </tr>
                           <tr>
@@ -139,12 +139,26 @@ under the License.
                   0
                 </td>
                 <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.gui.RandomGameListener.java">fi/ana/gui/RandomGameListener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
                   1
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.ana.logic.GameMap.java">fi/ana/logic/GameMap.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.ana.pathfinding.PathfinderCoordinate.java">fi/ana/pathfinding/PathfinderCoordinate.java</a>
                 </td>
                 <td>
                   0
@@ -153,12 +167,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  9
+                  2
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.ana.actions.MoveDown.java">fi/ana/actions/MoveDown.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.ana.gui.StartScreen.java">fi/ana/gui/StartScreen.java</a>
                 </td>
                 <td>
                   0
@@ -181,7 +195,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  3
+                  0
                 </td>
               </tr>
                           <tr>
@@ -200,7 +214,35 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.ana.gui.GraphicsArea.java">fi/ana/gui/GraphicsArea.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.ana.actions.MoveSouthwest.java">fi/ana/actions/MoveSouthwest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.actions.MoveNortheast.java">fi/ana/actions/MoveNortheast.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.logic.GameCharacter.java">fi/ana/logic/GameCharacter.java</a>
                 </td>
                 <td>
                   0
@@ -228,7 +270,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.ana.logic.Character.java">fi/ana/logic/Character.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.ana.gui.Game3Listener.java">fi/ana/gui/Game3Listener.java</a>
                 </td>
                 <td>
                   0
@@ -237,12 +279,124 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.ana.gui.Game3Listener.java">fi/ana/gui/Game3Listener.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.ana.logic.HealthPack.java">fi/ana/logic/HealthPack.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.gui.GraphicalUI.java">fi/ana/gui/GraphicalUI.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.actions.MoveRight.java">fi/ana/actions/MoveRight.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.actions.MoveSoutheast.java">fi/ana/actions/MoveSoutheast.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.logic.GameMap.java">fi/ana/logic/GameMap.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.actions.MoveDown.java">fi/ana/actions/MoveDown.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.logic.Item.java">fi/ana/logic/Item.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.gui.GraphicsArea.java">fi/ana/gui/GraphicsArea.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.pathfinding.Path.java">fi/ana/pathfinding/Path.java</a>
                 </td>
                 <td>
                   0

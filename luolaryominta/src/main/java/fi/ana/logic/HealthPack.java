@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fi.ana.logic;
 
 /**
- *
+ * Interacts with the player when stepped on.
  * @author katantti
  */
 public class HealthPack implements Item {
@@ -14,6 +10,11 @@ public class HealthPack implements Item {
     private int x;
     private int y;
 
+    /**
+     * Constructor.
+     * @param x x-coordinate.
+     * @param y y-coordinate.
+     */
     public HealthPack(int x, int y) {
         this.x = x;
         this.y = y;

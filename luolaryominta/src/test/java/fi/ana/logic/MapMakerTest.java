@@ -37,7 +37,7 @@ public class MapMakerTest {
 
         for (int y = 0; y < map.getSize(); y++) {
             for (int x = 0; x < map.getSize(); x++) {
-                if (map.getValue(x, y) != 0) {
+                if (map.getValue(x, y)) {
                     notEmpty = true;
                     break;
                 }
@@ -54,7 +54,7 @@ public class MapMakerTest {
 
         for (int y = 0; y < map.getSize(); y++) {
             for (int x = 0; x < map.getSize(); x++) {
-                if (map.getValue(x, y) != 0) {
+                if (map.getValue(x, y)) {
                     notEmpty = true;
                     break;
                 }
@@ -71,7 +71,7 @@ public class MapMakerTest {
 
         for (int y = 0; y < map.getSize(); y++) {
             for (int x = 0; x < map.getSize(); x++) {
-                if (map.getValue(x, y) != 0) {
+                if (map.getValue(x, y)) {
                     notEmpty = true;
                     break;
                 }

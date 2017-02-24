@@ -40,43 +40,19 @@ public class GameTest {
     @Test
     public void game1MonstersSpawnedTest() {
         game.game1();
-        int sum = 0;
-        for (int y = 0; y < game.getMap().getSize(); y++) {
-            for (int x = 0; x < game.getMap().getSize(); x++) {
-                if (game.getMap().getValue(x, y) == 2) {
-                    sum++;
-                }
-            }
-        }
-        assertEquals(1, sum);
+        assertEquals(1, game.getMonsters().size());
     }
 
     @Test
     public void game2MonstersSpawnedTest() {
         game.game2();
-        int sum = 0;
-        for (int y = 0; y < game.getMap().getSize(); y++) {
-            for (int x = 0; x < game.getMap().getSize(); x++) {
-                if (game.getMap().getValue(x, y) == 2) {
-                    sum++;
-                }
-            }
-        }
-        assertEquals(2, sum);
+        assertEquals(2, game.getMonsters().size());
     }
 
     @Test
     public void game3MonstersSpawnedTest() {
         game.game3();
-        int sum = 0;
-        for (int y = 0; y < game.getMap().getSize(); y++) {
-            for (int x = 0; x < game.getMap().getSize(); x++) {
-                if (game.getMap().getValue(x, y) == 2) {
-                    sum++;
-                }
-            }
-        }
-        assertEquals(3, sum);
+        assertEquals(3, game.getMonsters().size());
     }
 
     @Test
@@ -91,21 +67,21 @@ public class GameTest {
         assertEquals(2, game.getPlayer().getY());
     }
 
-    @Test
-    public void initializeMonstersTest1() {
-        List<GameCharacter> list = game.initializeMonsters(5);
-        assertEquals(5, list.size());
-    }
-
-    @Test
-    public void initializeMonstersTest2() {
-        List<GameCharacter> list = game.initializeMonsters(5);
-        for (GameCharacter c : list) {
-            assertEquals(-1, c.getX());
-            assertEquals(-1, c.getY());
-            assertEquals(2, c.getType());
-        }
-    }
+//    @Test
+//    public void initializeMonstersTest1() {
+//        List<GameCharacter> list = game.initializeMonsters(5);
+//        assertEquals(5, list.size());
+//    }
+//
+//    @Test
+//    public void initializeMonstersTest2() {
+//        List<GameCharacter> list = game.initializeMonsters(5);
+//        for (GameCharacter c : list) {
+//            assertEquals(-1, c.getX());
+//            assertEquals(-1, c.getY());
+//            assertEquals(2, c.getType());
+//        }
+//    }
 
     @Test
     public void moveByLimitsTest1() {
@@ -176,9 +152,9 @@ public class GameTest {
 
     @Test
     public void checkIfPassableCoordinateTest() {
-        game.getMap().setValue(0, 0, 1);
+        game.getMap().setValue(0, 0, true);
         assertTrue(!game.checkIfPassableCoordinate(0, 0));
-        game.getMap().setValue(0, 0, 0);
+        game.getMap().setValue(0, 0, false);
         assertTrue(game.checkIfPassableCoordinate(0, 0));
     }
 
@@ -188,5 +164,74 @@ public class GameTest {
         assertTrue(game.checkIfInhabitedCoordinate(1, 1));
         game.moveTo(game.getPlayer(), 2, 1);
         assertTrue(!game.checkIfInhabitedCoordinate(1, 1));
+    }
+    
+    @Test
+    public void monstersMoveOnProceedTest() {
+        game.game2();
+        int[] monster1 = new int[]{game.getMonsters().get(0).getX(), game.getMonsters().get(0).getY()};
+        int[] monster2 = new int[]{game.getMonsters().get(1).getX(), game.getMonsters().get(1).getY()};
+        game.proceed(0, 0);
+        if (monster1[0] == game.getMonsters().get(0).getX() && monster1[1] == game.getMonsters().get(0).getY()) {
+            assertTrue(false);
+        }
+        
+        if (monster2[0] == game.getMonsters().get(0).getX() && monster2[1] == game.getMonsters().get(1).getY()) {
+            assertTrue(false);
+        }
+    }
+    
+    @Test
+    public void playerMovesOnProceedTest() {
+        game.game2();
+        int[] player = new int[]{game.getPlayer().getX(), game.getPlayer().getY()};
+        game.proceed(1, 1);
+        assertEquals(player[0] + 1, game.getPlayer().getX());
+        assertEquals(player[1] + 1, game.getPlayer().getY());
+    }
+    
+    @Test
+    public void initializeHealthPackTest() {
+        game.game1();
+        assertNotNull(game.getItems());
+    }
+    
+    @Test
+    public void spawnHealthPackTest() {
+        game.game1();
+        int a = game.getItems().size();
+        game.spawnHealthPack();
+        assertEquals(a + 1, game.getItems().size());
+    }
+    
+    @Test
+    public void spawnMonsterTest() {
+        game.game1();
+        int a = game.getMonsters().size();
+        game.spawnMonster();
+        assertEquals(a + 1, game.getMonsters().size());
+    }
+    
+    @Test
+    public void resolveCombatDoesNothingAgainstNotMonster() {
+        game.game1();
+        assertTrue(game.resolveCombat(0, 0));
+    }
+    
+    @Test
+    public void randomGameCreatesRandomMap() {
+        game.randomGame();
+        GameMap map1 = game.getMap();
+        game.randomGame();
+        GameMap map2 = game.getMap();
+        for (int y = 0; y < game.getMap().getSize(); y++) {
+            for (int x = 0; x < game.getMap().getSize(); x++) {
+                if (map1.getValue(x, y) != map2.getValue(x, y)) {
+                    assertTrue(true);
+                    return;
+                }
+            }
+        }
+        assertTrue(false);
     }
 }

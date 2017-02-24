@@ -17,6 +17,10 @@ public class RandomGameListener implements ActionListener {
 
     private Game game;
     
+    /**
+     * Constructor.
+     * @param game game.
+     */
     public RandomGameListener(Game game) {
         this.game = game;
     }

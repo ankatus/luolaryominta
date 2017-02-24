@@ -10,4 +10,7 @@ Päivä | Tunnit | Kuvaus
 08.02.2017 | 3,0h | Oikean käyttöliittymän luonnin kokeilua
 10.02.2017 | 4,0h | Parempi yritys käyttöliittymän luontiin, logiikkaluokkien muuttelua yhteensopiviksi
 17.02.2017 | 5,0h | Hahmojen välistä interaktiota, asetusnappuloita, javadoccia
+21.02.2017 | 7,0h | Reitinetsintäalgoritmin toteutus.
+22.02.2017 | 5,0h | Kaikennäköistä pientä viilausta + alkukantaiset esineet.
+24.02.2017 | 3,0h | Deadlinen juttujen tekemistä.
 ... | ... | ...

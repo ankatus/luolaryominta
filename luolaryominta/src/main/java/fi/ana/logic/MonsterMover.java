@@ -15,6 +15,10 @@ public class MonsterMover {
     private Game game;
     private Random r;
 
+    /**
+     * Constructor.
+     * @param game 
+     */
     public MonsterMover(Game game) {
         r = new Random();
         this.game = game;
@@ -25,7 +29,7 @@ public class MonsterMover {
      * Characters cannot be moved out of bounds, in walls or on top of other
      * characters.
      *
-     * @param monsters
+     * @param monsters characters to be moved.
      */
     public void arrangeMonstersRandomly(List<GameCharacter> monsters) {
         int x;
@@ -48,7 +52,7 @@ public class MonsterMover {
     /**
      * Moves a character in a random position around its current position.
      *
-     * @param c
+     * @param c character to be moved.
      */
     public void moveRandomly(GameCharacter c) {
         int x;
@@ -65,6 +69,10 @@ public class MonsterMover {
         }
     }
 
+    /**
+     * Moves a character along it's path.
+     * @param monster character to be moved.
+     */
     public void moveOnPath(GameCharacter monster) {
         if (!monster.getPath().getPath().isEmpty()) {
             int x = monster.getPath().getPathfinderCoordinate(0).getX();
@@ -77,12 +85,20 @@ public class MonsterMover {
         }
     }
 
+    /**
+     * Gets a new path for a character.
+     * @param monster character.
+     */
     public void getNewPath(GameCharacter monster) {
         PathfinderCoordinate start = new PathfinderCoordinate(monster.getX(), monster.getY(), null);
         PathfinderCoordinate end = new PathfinderCoordinate(game.getPlayer().getX(), game.getPlayer().getY(), null);
         monster.setPath(Pathfinder.findPath(start, end, game.getMap()));
     }
 
+    /**
+     * Arranges Item-implementing objects randomly.
+     * @param items items to be arranged.
+     */
     public void arrangeItemsRandomly(List<Item> items) {
         int x;
         int y;
