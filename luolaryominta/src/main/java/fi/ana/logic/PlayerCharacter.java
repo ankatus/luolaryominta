@@ -23,7 +23,7 @@ public class PlayerCharacter extends Entity {
         return hp;
     }
 
-    public void setHP(int hp) {
+    public void setHp(int hp) {
         this.hp = hp;
     }
 

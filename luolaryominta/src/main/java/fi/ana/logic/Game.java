@@ -48,8 +48,12 @@ public class Game {
      * @param y amount of spaces the player should move on the y-axis.
      */
     public void proceed(int x, int y) {
-        if (turnCount % 5 == 0 && items.size() < 5) {
-            entitySpawner.spawnHealthPacks(1);
+        if (turnCount % 30 == 0 && items.size() < 5) {
+            items.addAll(entitySpawner.spawnHealthPacks(1));
+        }
+        
+        if (turnCount % 30 == 0 && monsters.size() < 5) {
+            monsters.addAll(entitySpawner.spawnMonsters(1));
         }
         turnCount++;
         gui.setTextTurnCountArea("Turn: " + turnCount);
@@ -66,7 +70,7 @@ public class Game {
         }
         resolveStackedItemAndPlayer();
         checkMonsterAggro();
-        moveMonsters();
+        monsterMover.moveMonsters(this);
         if (!resolveStackedMonsterAndPlayer()) {
             gui.setTextToHpArea("HP: " + player.getHp());
             gui.endGame(turnCount);
@@ -275,23 +279,7 @@ public class Game {
         return false;
     }
 
-    /**
-     * Gets new paths for monsters to follow.
-     */
-    public void updateMonsterPaths() {
-        for (Monster monster : monsters) {
-            monsterMover.getNewPath(monster);
-        }
-    }
 
-    /**
-     * Moves monsters along their path.
-     */
-    public void moveMonsters() {
-        for (Monster monster : monsters) {
-            monsterMover.moveOnPath(monster);
-        }
-    }
 
     /**
      * Resolves what happens in "combat" between the player and a monster in the
@@ -306,10 +294,10 @@ public class Game {
         for (int i = 0; i < monsters.size(); i++) {
             if (monsters.get(i).getX() == x && monsters.get(i).getY() == y) {
                 if (monsters.get(i).getHp() < player.getHp()) {
-                    player.setHP(player.getHp() - monsters.get(i).getHp());
+                    player.setHp(player.getHp() - monsters.get(i).getHp());
                     monsters.remove(i);
                 } else {
-                    player.setHP(player.getHp() - monsters.get(i).getHp());
+                    player.setHp(player.getHp() - monsters.get(i).getHp());
                     monsters.remove(i);
                     return false;
                 }

@@ -89,4 +89,22 @@ public class MonsterMover {
             }
         }
     }
+
+    /**
+     * Moves monsters along their path.
+     */
+    public void moveMonsters(Game game) {
+        for (Monster monster : game.getMonsters()) {
+            moveOnPath(monster);
+        }
+    }
+
+    /**
+     * Gets new paths for monsters to follow.
+     */
+    public void updateMonsterPaths(Game game) {
+        for (Monster monster : game.getMonsters()) {
+            getNewPath(monster);
+        }
+    }
 }

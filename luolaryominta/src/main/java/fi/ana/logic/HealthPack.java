@@ -19,7 +19,7 @@ public class HealthPack extends Item {
 
     @Override
     public void interact(PlayerCharacter player) {
-        player.setHP(player.getHp() + 1);
+        player.setHp(player.getHp() + 1);
     }
 
 }

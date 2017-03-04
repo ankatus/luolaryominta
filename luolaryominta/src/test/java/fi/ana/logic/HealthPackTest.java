@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class HealthPackTest {
 
     private HealthPack hPack;
-    private Monster gc;
+    private PlayerCharacter player;
 
     public HealthPackTest() {
     }
@@ -24,24 +24,24 @@ public class HealthPackTest {
     @Before
     public void setUp() {
         hPack = new HealthPack(0, 0);
-        gc = new Monster(0, 0, 0, 0);
+        player = new PlayerCharacter(0, 0, 0);
     }
 
     @Test
-    public void xSetGetTest() {
+    public void getSetXTest() {
         hPack.setX(5);
         assertEquals(5, hPack.getX());
     }
     
     @Test
-    public void ySetGetTest() {
+    public void GetSetYTest() {
         hPack.setY(5);
         assertEquals(5, hPack.getY());
     }
     
     @Test
     public void interactTest() {
-        hPack.interact(gc);
-        assertEquals(1, gc.getHp());
+        hPack.interact(player);
+        assertEquals(1, player.getHp());
     }
 }

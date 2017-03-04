@@ -19,7 +19,7 @@ public class Monster extends Entity {
         return path;
     }
 
-    public void setHP(int hp) {
+    public void setHp(int hp) {
         this.hp = hp;
     }
     
