@@ -45,11 +45,11 @@ public class GraphicalUI implements Runnable {
     public void setTextToHpArea(String s) {
         hpArea.setText(s);
     }
-    
+
     public void setTextToCountdownArea(String s) {
         countdownArea.setText(s);
     }
-    
+
     public void setTextTurnCountArea(String s) {
         turncountArea.setText(s);
     }
@@ -60,7 +60,7 @@ public class GraphicalUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Game");
-        frame.setPreferredSize(new Dimension(900, 700));
+        frame.setPreferredSize(new Dimension(900, 800));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         createStartScreen(frame);
         createMenu(frame);
@@ -109,7 +109,23 @@ public class GraphicalUI implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+    }
+    
+    private void createWinScreen(Container container, int turns) {
+        JPanel win = new JPanel();
+        try {
+            InputStream is = getClass().getClassLoader().getResourceAsStream("youone.png");
+            BufferedImage image = ImageIO.read(is);
+            ImageIcon icon = new ImageIcon(image);
+            JLabel label = new JLabel(icon);
+            win.add(label);
+            JTextArea teksti = new JTextArea("And it took you " + turns + " turns");
+            teksti.setFont(teksti.getFont().deriveFont(50f));
+            win.add(teksti);
+            container.add(win, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void createMenu(Container container) {
@@ -154,5 +170,10 @@ public class GraphicalUI implements Runnable {
     public void endGame(int turns) {
         frame.getContentPane().remove(0);
         createGameOverScreen(frame, turns);
+    }
+    
+    public void winGame(int turns) {
+        frame.getContentPane().remove(0);
+        createWinScreen(frame, turns);
     }
 }

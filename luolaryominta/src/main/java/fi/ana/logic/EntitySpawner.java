@@ -34,6 +34,12 @@ public class EntitySpawner {
         return list;
     }
 
+    public Goal spawnGoal() {
+        Goal goal = new Goal(-1, -1);
+        placeEntityRandomly(goal);
+        return goal;
+    }
+
     private void placeEntityRandomly(Entity e) {
         Random r = new Random();
         int x;

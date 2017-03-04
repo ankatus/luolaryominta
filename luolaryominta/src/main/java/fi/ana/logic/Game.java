@@ -21,6 +21,7 @@ public class Game {
     private MonsterMover monsterMover;
     private GraphicalUI gui;
     private int turnCount;
+    private Goal goal;
 
     /**
      * Constructor.
@@ -47,6 +48,9 @@ public class Game {
      * @param y amount of spaces the player should move on the y-axis.
      */
     public void proceed(int x, int y) {
+        if (turnCount % 5 == 0 && items.size() < 5) {
+            entitySpawner.spawnHealthPacks(1);
+        }
         turnCount++;
         gui.setTextTurnCountArea("Turn: " + turnCount);
         if (checkIfInhabitedCoordinate(player.getX() + x, player.getY() + y)) {
@@ -57,6 +61,9 @@ public class Game {
             gui.setTextToHpArea("HP: " + player.getHp());
         }
         moveBy(player, x, y);
+        if (checkIfOnGoal()) {
+            gui.winGame(turnCount);
+        }
         resolveStackedItemAndPlayer();
         checkMonsterAggro();
         moveMonsters();
@@ -86,6 +93,41 @@ public class Game {
         return map;
     }
 
+    public GameMap getVisibleMap() {
+        int realX = player.getX();
+        int realY = player.getY();
+        int visibleX = 0;
+        int visibleY = 0;
+        GameMap visibleMap = new GameMap(9);
+        for (int j = realY - 4; j <= realY + 4; j++) {
+            visibleX = 0;
+            for (int i = realX - 4; i <= realX + 4; i++) {
+                if (map.isValidCoordinate(realX, realY)) {
+                    visibleMap.setValue(visibleX, visibleY, map.getValue(realX, realY));
+                } else {
+                    visibleMap.setValue(visibleX, visibleY, true);
+                }
+                visibleX++;
+            }
+            visibleY++;
+        }
+        return visibleMap;
+    }
+
+    public boolean isPositionVisible(int x, int y) {
+
+        if (x > player.getX() + 5 || x < player.getX() - 5) {
+            return false;
+        }
+
+        if (y > player.getY() + 5 || y < player.getY() - 5) {
+            return false;
+        }
+
+        return true;
+
+    }
+
     /**
      * Returns a list of objects that implement the Item-interface.
      *
@@ -98,6 +140,10 @@ public class Game {
     public List<Monster> getMonsters() {
         return monsters;
     }
+    
+    public Goal getGoal() {
+        return goal;
+    }
 
     /**
      * Starts game1, setting all values back to default and re-randomising
@@ -106,6 +152,7 @@ public class Game {
     public void game1() {
         turnCount = 0;
         map = MapMaker.makeSmallMap();
+        goal = entitySpawner.spawnGoal();
         player = new PlayerCharacter(1, 1, 1);
         monsters = entitySpawner.spawnMonsters(1);
         items = entitySpawner.spawnHealthPacks(1);
@@ -122,6 +169,7 @@ public class Game {
     public void game2() {
         turnCount = 0;
         map = MapMaker.makeMediumMap();
+        goal = entitySpawner.spawnGoal();
         player = new PlayerCharacter(1, 1, 2);
         monsters = entitySpawner.spawnMonsters(2);
         items = entitySpawner.spawnHealthPacks(1);
@@ -137,7 +185,8 @@ public class Game {
      */
     public void game3() {
         turnCount = 0;
-        map = MapMaker.makeSmallMap();
+        map = MapMaker.makeLargeMap();
+        goal = entitySpawner.spawnGoal();
         player = new PlayerCharacter(1, 1, 3);
         monsters = entitySpawner.spawnMonsters(3);
         items = entitySpawner.spawnHealthPacks(1);
@@ -293,12 +342,16 @@ public class Game {
         }
     }
 
+    public boolean checkIfOnGoal() {
+        return player.getX() == goal.getX() && player.getY() == goal.getY();
+    }
+
     public void checkMonsterAggro() {
         for (Monster m : monsters) {
-            if (Math.abs(m.getX() - player.getX()) + Math.abs(m.getY() - player.getY()) < 10) {
+            if (Math.abs(m.getX() - player.getX()) + Math.abs(m.getY() - player.getY()) < 6) {
                 monsterMover.getNewPath(m);
             } else if (m.getPath() != null) {
-                m.getPath().getPath().clear();
+                m.setPath(null);
             }
         }
     }

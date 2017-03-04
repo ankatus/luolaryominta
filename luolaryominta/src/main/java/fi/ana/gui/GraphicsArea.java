@@ -29,7 +29,7 @@ public class GraphicsArea extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawMap(g);
-        drawMonstersPlayerAndItems(g);
+        drawMonstersPlayerGoalAndItems(g);
     }
 
     /**
@@ -41,27 +41,40 @@ public class GraphicsArea extends JPanel {
     public void drawMap(Graphics g) {
         for (int y = 0; y < game.getMap().getSize(); y++) {
             for (int x = 0; x < game.getMap().getSize(); x++) {
-                if (game.getMap().getValue(x, y)) {
-                    g.setColor(Color.BLACK);
-                    g.fillRect(x * 15, y * 15, 14, 14);
+                if (game.isPositionVisible(x, y)) {
+                    if (game.getMap().getValue(x, y)) {
+                        g.setColor(Color.BLACK);
+                        g.fillRect(x * 15, y * 15, 14, 14);
+                    } else {
+                        g.setColor(Color.WHITE);
+                        g.fillRect(x * 15, y * 15, 15, 15);
+                    }
                 } else {
-                    g.setColor(Color.WHITE);
+                    g.setColor(Color.GRAY);
                     g.fillRect(x * 15, y * 15, 15, 15);
                 }
             }
         }
     }
-    
-    public void drawMonstersPlayerAndItems(Graphics g) {
+
+    public void drawMonstersPlayerGoalAndItems(Graphics g) {
         g.setColor(Color.RED);
         for (Monster m : game.getMonsters()) {
-            g.fillRect(m.getX() * 15, m.getY() * 15, 14, 14);
+            if (game.isPositionVisible(m.getX(), m.getY())) {
+                g.fillRect(m.getX() * 15, m.getY() * 15, 14, 14);
+            }
         }
         g.setColor(Color.BLUE);
         g.fillRect(game.getPlayer().getX() * 15, game.getPlayer().getY() * 15, 15, 15);
         g.setColor(Color.GREEN);
         for (Item i : game.getItems()) {
-            g.fillRect(i.getX() * 15, i.getY() * 15, 15, 15);
+            if (game.isPositionVisible(i.getX(), i.getY())) {
+                g.fillRect(i.getX() * 15, i.getY() * 15, 15, 15);
+            }
+        }
+        g.setColor(Color.YELLOW);
+        if (game.isPositionVisible(game.getGoal().getX(), game.getGoal().getY())) {
+            g.fillRect(game.getGoal().getX() * 15, game.getGoal().getY() * 15, 14, 14);
         }
     }
 }
