@@ -10,14 +10,14 @@ import static org.junit.Assert.*;
 
 public class CharacterTest {
 
-    private GameCharacter c;
+    private Monster c;
 
     public CharacterTest() {
     }
 
     @Before
     public void setUp() {
-        c = new GameCharacter(1, 2, 3, 3);
+        c = new Monster(1, 2, 3, 3);
     }
 
     @Test

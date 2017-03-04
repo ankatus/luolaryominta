@@ -3,7 +3,7 @@ package fi.ana.gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-import fi.ana.logic.GameCharacter;
+import fi.ana.logic.Monster;
 import fi.ana.logic.Game;
 import fi.ana.logic.Item;
 
@@ -54,8 +54,8 @@ public class GraphicsArea extends JPanel {
     
     public void drawMonstersPlayerAndItems(Graphics g) {
         g.setColor(Color.RED);
-        for (GameCharacter c : game.getMonsters()) {
-            g.fillRect(c.getX() * 15, c.getY() * 15, 14, 14);
+        for (Monster m : game.getMonsters()) {
+            g.fillRect(m.getX() * 15, m.getY() * 15, 14, 14);
         }
         g.setColor(Color.BLUE);
         g.fillRect(game.getPlayer().getX() * 15, game.getPlayer().getY() * 15, 15, 15);

@@ -25,36 +25,11 @@ public class MonsterMover {
     }
 
     /**
-     * Moves all the characters in the input list to random positions.
-     * Characters cannot be moved out of bounds, in walls or on top of other
-     * characters.
-     *
-     * @param monsters characters to be moved.
-     */
-    public void arrangeMonstersRandomly(List<GameCharacter> monsters) {
-        int x;
-        int y;
-        for (GameCharacter c : monsters) {
-            while (true) {
-                x = r.nextInt(game.getMap().getSize() - 2);
-                y = r.nextInt(game.getMap().getSize() - 2);
-                if (!game.checkIfInhabitedCoordinate(x, y) && game.checkIfPassableCoordinate(x, y)) {
-                    game.moveTo(c, x, y);
-                    ArrayList<PathfinderCoordinate> list = new ArrayList();
-                    list.add(new PathfinderCoordinate(c.getX(), c.getY(), null));
-                    c.setPath(new Path(list));
-                    break;
-                }
-            }
-        }
-    }
-
-    /**
      * Moves a character in a random position around its current position.
      *
      * @param c character to be moved.
      */
-    public void moveRandomly(GameCharacter c) {
+    public void moveRandomly(Monster c) {
         int x;
         int y;
         while (true) {
@@ -73,8 +48,8 @@ public class MonsterMover {
      * Moves a character along it's path.
      * @param monster character to be moved.
      */
-    public void moveOnPath(GameCharacter monster) {
-        if (!monster.getPath().getPath().isEmpty()) {
+    public void moveOnPath(Monster monster) {
+        if (monster.getPath() != null) {
             int x = monster.getPath().getPathfinderCoordinate(0).getX();
             int y = monster.getPath().getPathfinderCoordinate(0).getY();
             if (game.checkIfInhabitedCoordinate(x, y) && game.getPlayer().getX() != x && game.getPlayer().getY() != y) {
@@ -89,7 +64,7 @@ public class MonsterMover {
      * Gets a new path for a character.
      * @param monster character.
      */
-    public void getNewPath(GameCharacter monster) {
+    public void getNewPath(Monster monster) {
         PathfinderCoordinate start = new PathfinderCoordinate(monster.getX(), monster.getY(), null);
         PathfinderCoordinate end = new PathfinderCoordinate(game.getPlayer().getX(), game.getPlayer().getY(), null);
         monster.setPath(Pathfinder.findPath(start, end, game.getMap()));
@@ -99,16 +74,16 @@ public class MonsterMover {
      * Arranges Item-implementing objects randomly.
      * @param items items to be arranged.
      */
-    public void arrangeItemsRandomly(List<Item> items) {
+    public void arrangeEntitiesRandomly(List<Entity> list) {
         int x;
         int y;
-        for (Item i : items) {
+        for (Entity e : list) {
             while (true) {
                 x = r.nextInt(game.getMap().getSize() - 2);
                 y = r.nextInt(game.getMap().getSize() - 2);
                 if (!game.checkIfInhabitedCoordinate(x, y) && game.checkIfPassableCoordinate(x, y)) {
-                    i.setX(x);
-                    i.setY(y);
+                    e.setX(x);
+                    e.setY(y);
                     break;
                 }
             }

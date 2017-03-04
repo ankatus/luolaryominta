@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class HealthPackTest {
 
     private HealthPack hPack;
-    private GameCharacter gc;
+    private Monster gc;
 
     public HealthPackTest() {
     }
@@ -24,7 +24,7 @@ public class HealthPackTest {
     @Before
     public void setUp() {
         hPack = new HealthPack(0, 0);
-        gc = new GameCharacter(0, 0, 0, 0);
+        gc = new Monster(0, 0, 0, 0);
     }
 
     @Test

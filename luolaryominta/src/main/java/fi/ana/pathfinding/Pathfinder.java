@@ -125,5 +125,17 @@ public class Pathfinder {
         }
         return null;
     }
-
+    
+    private static List<PathfinderCoordinate> surroundingCoordinates(PathfinderCoordinate pc) {
+        PathfinderCoordinate a = new PathfinderCoordinate(pc.getX(), pc.getY() - 1, null);
+        PathfinderCoordinate b = new PathfinderCoordinate(pc.getX() + 1, pc.getY(), null);
+        PathfinderCoordinate c = new PathfinderCoordinate(pc.getX(), pc.getY() + 1, null);
+        PathfinderCoordinate d = new PathfinderCoordinate(pc.getX() - 1, pc.getY(), null);
+        List<PathfinderCoordinate> returnList = new ArrayList();
+        returnList.add(a);
+        returnList.add(b);
+        returnList.add(c);
+        returnList.add(d);
+        return returnList;
+    }
 }
