@@ -67,21 +67,6 @@ public class GameTest {
         assertEquals(2, game.getPlayer().getY());
     }
 
-//    @Test
-//    public void initializeMonstersTest1() {
-//        List<GameCharacter> list = game.initializeMonsters(5);
-//        assertEquals(5, list.size());
-//    }
-//
-//    @Test
-//    public void initializeMonstersTest2() {
-//        List<GameCharacter> list = game.initializeMonsters(5);
-//        for (GameCharacter c : list) {
-//            assertEquals(-1, c.getX());
-//            assertEquals(-1, c.getY());
-//            assertEquals(2, c.getType());
-//        }
-//    }
 
     @Test
     public void moveByLimitsTest1() {
@@ -194,22 +179,6 @@ public class GameTest {
     public void initializeHealthPackTest() {
         game.game1();
         assertNotNull(game.getItems());
-    }
-    
-    @Test
-    public void spawnHealthPackTest() {
-        game.game1();
-        int a = game.getItems().size();
-        game.spawnHealthPack();
-        assertEquals(a + 1, game.getItems().size());
-    }
-    
-    @Test
-    public void spawnMonsterTest() {
-        game.game1();
-        int a = game.getMonsters().size();
-        game.spawnMonster();
-        assertEquals(a + 1, game.getMonsters().size());
     }
     
     @Test
