@@ -32,18 +32,23 @@ public class EntitySpawnerTest {
     
     @Test
     public void spawnHealthPacksTest() {
+        game.start();
+        game.game1();
         game.getItems().addAll(entitySpawner.spawnHealthPacks(5));
-        assertEquals(5, game.getItems().size());
+        assertEquals(6, game.getItems().size());
     }
     
     @Test
     public void spawnMonstersTest() {
+        game.start();
+        game.game1();
         game.getMonsters().addAll(entitySpawner.spawnMonsters(5));
-        assertEquals(5, game.getMonsters().size());
+        assertEquals(6, game.getMonsters().size());
     }
     
     @Test
     public void spawnGoalTest() {
+        game.start();
         game.game1();
         assertNotNull(game.getGoal());
     }

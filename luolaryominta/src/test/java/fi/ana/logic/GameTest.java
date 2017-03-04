@@ -152,21 +152,6 @@ public class GameTest {
     }
     
     @Test
-    public void monstersMoveOnProceedTest() {
-        game.game2();
-        int[] monster1 = new int[]{game.getMonsters().get(0).getX(), game.getMonsters().get(0).getY()};
-        int[] monster2 = new int[]{game.getMonsters().get(1).getX(), game.getMonsters().get(1).getY()};
-        game.proceed(0, 0);
-        if (monster1[0] == game.getMonsters().get(0).getX() && monster1[1] == game.getMonsters().get(0).getY()) {
-            assertTrue(false);
-        }
-        
-        if (monster2[0] == game.getMonsters().get(0).getX() && monster2[1] == game.getMonsters().get(1).getY()) {
-            assertTrue(false);
-        }
-    }
-    
-    @Test
     public void playerMovesOnProceedTest() {
         game.game2();
         int[] player = new int[]{game.getPlayer().getX(), game.getPlayer().getY()};
