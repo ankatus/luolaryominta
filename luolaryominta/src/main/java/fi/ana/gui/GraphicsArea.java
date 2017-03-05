@@ -18,7 +18,7 @@ public class GraphicsArea extends JPanel {
     /**
      * Constructor.
      *
-     * @param game
+     * @param game game.
      */
     public GraphicsArea(Game game) {
         super.setBackground(Color.GRAY);
@@ -34,9 +34,9 @@ public class GraphicsArea extends JPanel {
 
     /**
      * Draws an appropriately coloured square for each coordinate in the
-     * GameMap.
+     * GameMap, if that position is visible.
      *
-     * @param g
+     * @param g Graphics-object.
      */
     public void drawMap(Graphics g) {
         for (int y = 0; y < game.getMap().getSize(); y++) {
@@ -57,6 +57,10 @@ public class GraphicsArea extends JPanel {
         }
     }
 
+    /**
+     * Draws monsters, player, goal and items if they are visible.
+     * @param g Graphics-object.
+     */
     public void drawMonstersPlayerGoalAndItems(Graphics g) {
         g.setColor(Color.RED);
         for (Monster m : game.getMonsters()) {

@@ -13,7 +13,7 @@ public class Path {
 
     /**
      * Constructor.
-     * @param path 
+     * @param path list of PathfinderCoordinate-objects.
      */
     public Path(List<PathfinderCoordinate> path) {
         this.path = path;

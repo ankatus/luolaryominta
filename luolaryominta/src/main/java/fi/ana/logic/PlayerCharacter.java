@@ -1,7 +1,7 @@
 package fi.ana.logic;
 import fi.ana.pathfinding.*;
 /**
- * Stores all the information related to a character.
+ * Entity containing a field for hp. Represents the player.
  * 
  */
 public class PlayerCharacter extends Entity {
@@ -9,10 +9,10 @@ public class PlayerCharacter extends Entity {
     private int hp;
     
     /**
-     * Holds data associated with the characters in-game.
+     * Constructor.
      * @param x x-coordinate.
      * @param y y-coordinate.
-     * @param hp hp.
+     * @param hp amount of hp.
      */
     public PlayerCharacter(int x, int y, int hp) {
         super(x, y);

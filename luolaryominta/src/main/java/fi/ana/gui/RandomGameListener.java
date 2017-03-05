@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * ActionListener for the random game -button.
  * @author katantti
  */
 public class RandomGameListener implements ActionListener {

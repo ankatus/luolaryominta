@@ -14,7 +14,7 @@ public class MoveRight extends AbstractAction {
 
     /**
      * Constructor.
-     * @param game 
+     * @param game game to interact with.
      */
     public MoveRight(Game game) {
         this.game = game;

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en_GB" lang="en_GB">
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Monster xref</title>
+<link type="text/css" rel="stylesheet" href="../../../stylesheet.css" />
+</head>
+<body>
+<div id="overview"><a href="../../../../apidocs/fi/ana/logic/Monster.html">View Javadoc</a></div><pre>
+<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> fi.ana.logic;
+<a class="jxr_linenumber" name="L2" href="#L2">2</a>   <strong class="jxr_keyword">import</strong> fi.ana.pathfinding.*;
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_javadoccomment"> * Entity containing fields for hp and path.</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_javadoccomment"> * @author katantti</em>
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../fi/ana/logic/Monster.html">Monster</a> <strong class="jxr_keyword">extends</strong> <a href="../../../fi/ana/logic/Entity.html">Entity</a> {
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">int</strong> hp;
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>      <strong class="jxr_keyword">private</strong> <a href="../../../fi/ana/pathfinding/Path.html">Path</a> path;
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>      
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_javadoccomment">     * Constructor.</em>
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_javadoccomment">     * @param x x-coordinate.</em>
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  <em class="jxr_javadoccomment">     * @param y y-coordinate.</em>
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  <em class="jxr_javadoccomment">     * @param hp amount of hp.</em>
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <em class="jxr_javadoccomment">     * @param path path to follow.</em>
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>      <strong class="jxr_keyword">public</strong> <a href="../../../fi/ana/logic/Monster.html">Monster</a>(<strong class="jxr_keyword">int</strong> x, <strong class="jxr_keyword">int</strong> y, <strong class="jxr_keyword">int</strong> hp, <a href="../../../fi/ana/pathfinding/Path.html">Path</a> path) {
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>          <strong class="jxr_keyword">super</strong>(x, y);
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>          <strong class="jxr_keyword">this</strong>.hp = hp;
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>      }
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">int</strong> getHp() {
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>          <strong class="jxr_keyword">return</strong> hp;
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>      }
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>      
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>      <strong class="jxr_keyword">public</strong> <a href="../../../fi/ana/pathfinding/Path.html">Path</a> getPath() {
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>          <strong class="jxr_keyword">return</strong> path;
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>      }
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> setHp(<strong class="jxr_keyword">int</strong> hp) {
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>          <strong class="jxr_keyword">this</strong>.hp = hp;
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>      }
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>      
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> setPath(<a href="../../../fi/ana/pathfinding/Path.html">Path</a> path) {
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>          <strong class="jxr_keyword">this</strong>.path = path;
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>      }
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>  
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  }
+</pre>
+<hr/>
+<div id="footer">Copyright &#169; 2017. All rights reserved.</div>
+</body>
+</html>

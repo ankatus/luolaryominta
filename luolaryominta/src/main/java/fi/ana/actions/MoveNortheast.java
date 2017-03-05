@@ -5,7 +5,7 @@ import javax.swing.AbstractAction;
 import fi.ana.logic.Game;
 
 /**
- * Action for moving the player character down.
+ * Action for moving the player character up and to the right.
  * 
  */
 public class MoveNortheast extends AbstractAction {
@@ -14,7 +14,7 @@ public class MoveNortheast extends AbstractAction {
 
     /**
      * Constructor.
-     * @param game 
+     * @param game game to interact with.
      */
     public MoveNortheast(Game game) {
         this.game = game;

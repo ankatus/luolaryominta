@@ -10,7 +10,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 /**
- *
+ * Class for displaying the start screen.
  * @author katantti
  */
 public class StartScreen extends JPanel {

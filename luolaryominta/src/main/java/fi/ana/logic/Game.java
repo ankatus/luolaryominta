@@ -6,10 +6,8 @@ import fi.ana.gui.GraphicalUI;
 import fi.ana.pathfinding.Path;
 
 /**
+ * Smushes all the logic together, starts games and proceeds to the next turn.
  *
- * Handles all of the player movement logic, starts the UI, and acts as a hub
- * for all the logic of the game. Will be refactored to multiple classes at some
- * point (probably).
  */
 public class Game {
 
@@ -18,7 +16,7 @@ public class Game {
     private List<Item> items;
     private PlayerCharacter player;
     private GameMap map;
-    private MonsterMover monsterMover;
+    private EntityMover monsterMover;
     private GraphicalUI gui;
     private int turnCount;
     private Goal goal;
@@ -30,12 +28,12 @@ public class Game {
         gui = new GraphicalUI(this);
         monsters = new ArrayList();
         items = new ArrayList();
-        monsterMover = new MonsterMover(this);
+        monsterMover = new EntityMover(this);
         entitySpawner = new EntitySpawner(this);
     }
 
     /**
-     * Starts the game.
+     * Starts the game UI.
      */
     public void start() {
         gui.run();
@@ -48,23 +46,14 @@ public class Game {
      * @param y amount of spaces the player should move on the y-axis.
      */
     public void proceed(int x, int y) {
-        if (turnCount % 30 == 0 && items.size() < 5) {
-            items.addAll(entitySpawner.spawnHealthPacks(1));
-        }
-        
-        if (turnCount % 30 == 0 && monsters.size() < 5) {
-            monsters.addAll(entitySpawner.spawnMonsters(1));
-        }
+        spawnEntitiesIfValidTurn();
         turnCount++;
-        gui.setTextTurnCountArea("Turn: " + turnCount);
         if (checkIfInhabitedCoordinate(player.getX() + x, player.getY() + y)) {
             if (!resolveCombat(player.getX() + x, player.getY() + y)) {
-                gui.setTextToHpArea("HP: " + player.getHp());
                 gui.endGame(turnCount);
             }
-            gui.setTextToHpArea("HP: " + player.getHp());
         }
-        moveBy(player, x, y);
+        monsterMover.moveTo(player, player.getX() + x, player.getY() + y);
         if (checkIfOnGoal()) {
             gui.winGame(turnCount);
         }
@@ -72,10 +61,8 @@ public class Game {
         checkMonsterAggro();
         monsterMover.moveMonsters(this);
         if (!resolveStackedMonsterAndPlayer()) {
-            gui.setTextToHpArea("HP: " + player.getHp());
             gui.endGame(turnCount);
         }
-        gui.setTextToHpArea("HP: " + player.getHp());
         gui.refresh();
     }
 
@@ -97,27 +84,22 @@ public class Game {
         return map;
     }
 
-    public GameMap getVisibleMap() {
-        int realX = player.getX();
-        int realY = player.getY();
-        int visibleX = 0;
-        int visibleY = 0;
-        GameMap visibleMap = new GameMap(9);
-        for (int j = realY - 4; j <= realY + 4; j++) {
-            visibleX = 0;
-            for (int i = realX - 4; i <= realX + 4; i++) {
-                if (map.isValidCoordinate(realX, realY)) {
-                    visibleMap.setValue(visibleX, visibleY, map.getValue(realX, realY));
-                } else {
-                    visibleMap.setValue(visibleX, visibleY, true);
-                }
-                visibleX++;
-            }
-            visibleY++;
-        }
-        return visibleMap;
+    /**
+     * Returns how many turns have passed.
+     *
+     * @return turn count.
+     */
+    public int getTurnCount() {
+        return turnCount;
     }
 
+    /**
+     * Checks if the specified position should be visible to the player.
+     *
+     * @param x x-coordinate.
+     * @param y y-coordinate.
+     * @return true if visible, false if not.
+     */
     public boolean isPositionVisible(int x, int y) {
 
         if (x > player.getX() + 5 || x < player.getX() - 5) {
@@ -133,25 +115,35 @@ public class Game {
     }
 
     /**
-     * Returns a list of objects that implement the Item-interface.
+     * Returns a list of items currently in the game.
      *
-     * @return A list of objects.
+     * @return A list of Item-objects.
      */
     public List<Item> getItems() {
         return items;
     }
 
+    /**
+     * Returns a list of monsters currently in the game.
+     *
+     * @return A list of Monster-objects.
+     */
     public List<Monster> getMonsters() {
         return monsters;
     }
-    
+
+    /**
+     * Returns the Goal-object of the game.
+     *
+     * @return A Goal-object.
+     */
     public Goal getGoal() {
         return goal;
     }
 
     /**
-     * Starts game1, setting all values back to default and re-randomising
-     * monster locations.
+     * Starts game1, setting all values back to default game1-values and
+     * re-randomising monster locations.
      */
     public void game1() {
         turnCount = 0;
@@ -167,8 +159,8 @@ public class Game {
     }
 
     /**
-     * Starts game2, setting all values back to default and re-randomising
-     * monster locations.
+     * Starts game2, setting all values back to default game2-values and
+     * re-randomising monster locations.
      */
     public void game2() {
         turnCount = 0;
@@ -184,8 +176,8 @@ public class Game {
     }
 
     /**
-     * Starts game2, setting all values back to default and re-randomising
-     * monster locations.
+     * Starts game3, setting all values back to default game3-values and
+     * re-randomising monster locations.
      */
     public void game3() {
         turnCount = 0;
@@ -201,8 +193,8 @@ public class Game {
     }
 
     /**
-     * Starts a random game, setting all values back to default and
-     * re-randomising monster locations. The map will be randomised.
+     * Starts a random game, setting all values back to default random game
+     * -values and re-randomising monster locations. The map will be randomised.
      */
     public void randomGame() {
         turnCount = 0;
@@ -217,41 +209,11 @@ public class Game {
     }
 
     /**
-     * Moves a Character object by the specified distance.
-     *
-     * @param c Character to be moved.
-     * @param x Distance to be moved laterally.
-     * @param y Distance to be moved vertically.
-     */
-    public void moveBy(Entity e, int x, int y) {
-        if (!checkIfPassableCoordinate(e.getX() + x, e.getY() + y)) {
-            return;
-        }
-        e.setX(e.getX() + x);
-        e.setY(e.getY() + y);
-    }
-
-    /**
-     * Moves a Character object to the specified coordinate.
-     *
-     * @param c Character to be moved.
-     * @param x x-coordinate.
-     * @param y y-coordinate.
-     */
-    public void moveTo(Entity e, int x, int y) {
-        if (!checkIfPassableCoordinate(x, y)) {
-            return;
-        }
-        e.setX(x);
-        e.setY(y);
-    }
-
-    /**
-     * Checks if the specified location is 1) on the map 2) not obstructed.
+     * Checks if the specified position is a valid position for moving into.
      *
      * @param x x-coordinate.
      * @param y y-coordinate.
-     * @return true or false
+     * @return true if passable, false if not.
      */
     public boolean checkIfPassableCoordinate(int x, int y) {
         if (!map.isValidCoordinate(x, y)) {
@@ -261,11 +223,12 @@ public class Game {
     }
 
     /**
-     * Checks if the specified location is currently inhabited by a Character.
+     * Checks if the specified location is currently inhabited by a player or a
+     * monster.
      *
      * @param x x-coordinate.
      * @param y y-coordinate.
-     * @return true or false
+     * @return true if inhabited, false if not.
      */
     public boolean checkIfInhabitedCoordinate(int x, int y) {
         if (player != null && player.getX() == x && player.getY() == y) {
@@ -279,16 +242,13 @@ public class Game {
         return false;
     }
 
-
-
     /**
      * Resolves what happens in "combat" between the player and a monster in the
-     * specified coordinates. Returns true if the player survives, false if they
-     * die
+     * specified coordinates.
      *
      * @param x x-coordinate of monster to combat.
      * @param y y-coordinate of monster to combat.
-     * @return true or false.
+     * @return true if the player survives, false if not.
      */
     public boolean resolveCombat(int x, int y) {
         for (int i = 0; i < monsters.size(); i++) {
@@ -309,7 +269,7 @@ public class Game {
     /**
      * Calls the resolveCombat method on the player's coordinates.
      *
-     * @return true or false.
+     * @return true if the player survives, false if not.
      */
     public boolean resolveStackedMonsterAndPlayer() {
         return resolveCombat(player.getX(), player.getY());
@@ -318,7 +278,6 @@ public class Game {
     /**
      * Calls the interact()-method of any items stacked with the player.
      *
-     * @return true or false;
      */
     public void resolveStackedItemAndPlayer() {
         for (int i = 0; i < items.size(); i++) {
@@ -330,10 +289,17 @@ public class Game {
         }
     }
 
+    /**
+     * Checks if the player character is on the goal.
+     * @return true if the player is on the goal, fals if not.
+     */
     public boolean checkIfOnGoal() {
         return player.getX() == goal.getX() && player.getY() == goal.getY();
     }
 
+    /**
+     * Checks if the player is inside aggro range of any monster, and activates their pathfinding if so.
+     */
     public void checkMonsterAggro() {
         for (Monster m : monsters) {
             if (Math.abs(m.getX() - player.getX()) + Math.abs(m.getY() - player.getY()) < 6) {
@@ -341,6 +307,19 @@ public class Game {
             } else if (m.getPath() != null) {
                 m.setPath(null);
             }
+        }
+    }
+
+    /**
+     * Spawns a new monster and/or healthpack if correct turn, and if there are not too many.
+     */
+    public void spawnEntitiesIfValidTurn() {
+        if (turnCount % 30 == 0 && items.size() < 5) {
+            items.addAll(entitySpawner.spawnHealthPacks(1));
+        }
+
+        if (turnCount % 30 == 0 && monsters.size() < 5) {
+            monsters.addAll(entitySpawner.spawnMonsters(1));
         }
     }
 }

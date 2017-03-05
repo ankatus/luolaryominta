@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 26,
-             Errors: 8,
+      <title>File: 30,
+             Errors: 3,
              Warnings: 0,
              Infos: 0
       </title>
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.ana.logic.MonsterMover.java">fi/ana/logic/MonsterMover.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.ana.logic.EntitySpawner.java">fi/ana/logic/EntitySpawner.java</a>
                 </td>
                 <td>
                   0
@@ -153,7 +153,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
               </tr>
                           <tr>
@@ -242,7 +242,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.ana.logic.GameCharacter.java">fi/ana/logic/GameCharacter.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.ana.logic.Entity.java">fi/ana/logic/Entity.java</a>
                 </td>
                 <td>
                   0
@@ -271,6 +271,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#fi.ana.gui.Game3Listener.java">fi/ana/gui/Game3Listener.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.logic.EntityMover.java">fi/ana/logic/EntityMover.java</a>
                 </td>
                 <td>
                   0
@@ -377,7 +391,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  4
+                  0
                 </td>
               </tr>
                           <tr>
@@ -396,7 +410,49 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.logic.PlayerCharacter.java">fi/ana/logic/PlayerCharacter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#fi.ana.pathfinding.Path.java">fi/ana/pathfinding/Path.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.logic.Monster.java">fi/ana/logic/Monster.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.ana.logic.Goal.java">fi/ana/logic/Goal.java</a>
                 </td>
                 <td>
                   0

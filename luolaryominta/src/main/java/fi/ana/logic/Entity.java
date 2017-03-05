@@ -6,7 +6,7 @@
 package fi.ana.logic;
 
 /**
- *
+ * Abstract class representing a basic entity with a position.
  * @author katantti
  */
 public abstract class Entity {
@@ -14,6 +14,11 @@ public abstract class Entity {
     private int x;
     private int y;
     
+    /**
+     * Constructor.
+     * @param x x-coordinate.
+     * @param y y-coordinate.
+     */
     public Entity(int x, int y) {
         this.x = x;
         this.y = y;

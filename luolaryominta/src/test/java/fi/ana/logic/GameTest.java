@@ -1,5 +1,6 @@
 package fi.ana.logic;
 
+import fi.ana.pathfinding.Path;
 import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,74 +68,6 @@ public class GameTest {
         assertEquals(2, game.getPlayer().getY());
     }
 
-
-    @Test
-    public void moveByLimitsTest1() {
-        game.moveBy(game.getPlayer(), game.getMap().getSize() + 10, 0);
-        assertEquals(1, game.getPlayer().getX());
-
-    }
-
-    @Test
-    public void moveByLimitsTest2() {
-        game.moveBy(game.getPlayer(), 0, game.getMap().getSize() + 10);
-        assertEquals(1, game.getPlayer().getY());
-    }
-
-    @Test
-    public void moveByLimitsTest3() {
-        game.moveBy(game.getPlayer(), 0, -1 * game.getMap().getSize() - 10);
-        assertEquals(1, game.getPlayer().getY());
-    }
-
-    @Test
-    public void moveByLimitsTest4() {
-        game.moveBy(game.getPlayer(), -1 * game.getMap().getSize() - 10, 0);
-        assertEquals(1, game.getPlayer().getX());
-    }
-
-    @Test
-    public void moveByTest1() {
-        for (int i = 0; i < game.getMap().getSize(); i++) {
-            game.moveBy(game.getPlayer(), 1, 0);
-        }
-        assertEquals(game.getMap().getSize() - 2, game.getPlayer().getX());
-    }
-
-    @Test
-    public void moveByTest2() {
-        for (int i = 0; i < game.getMap().getSize(); i++) {
-            game.moveBy(game.getPlayer(), 0, 1);
-        }
-        assertEquals(game.getMap().getSize() - 2, game.getPlayer().getY());
-    }
-
-    @Test
-    public void moveByTest3() {
-        game.moveBy(game.getPlayer(), game.getMap().getSize() - 3, 0);
-        assertEquals(game.getMap().getSize() - 2, game.getPlayer().getX());
-    }
-
-    @Test
-    public void moveByTest4() {
-        game.moveBy(game.getPlayer(), 0, game.getMap().getSize() - 3);
-        assertEquals(game.getMap().getSize() - 2, game.getPlayer().getY());
-    }
-
-    @Test
-    public void moveToTest1() {
-        game.moveTo(game.getPlayer(), 2, 1);
-        assertEquals(game.getPlayer().getX(), 2);
-        assertEquals(game.getPlayer().getY(), 1);
-    }
-
-    @Test
-    public void moveToTest2() {
-        game.moveTo(game.getPlayer(), game.getMap().getSize() / 2, game.getMap().getSize() / 2);
-        assertEquals(game.getMap().getSize() / 2, game.getPlayer().getX());
-        assertEquals(game.getMap().getSize() / 2, game.getPlayer().getY());
-    }
-
     @Test
     public void checkIfPassableCoordinateTest() {
         game.getMap().setValue(0, 0, true);
@@ -145,9 +78,11 @@ public class GameTest {
 
     @Test
     public void checkIfInhabitedCoordinate() {
-        game.moveTo(game.getPlayer(), 1, 1);
+        game.getPlayer().setX(1);
+        game.getPlayer().setY(1);
         assertTrue(game.checkIfInhabitedCoordinate(1, 1));
-        game.moveTo(game.getPlayer(), 2, 1);
+        game.getPlayer().setX(2);
+        game.getPlayer().setY(1);
         assertTrue(!game.checkIfInhabitedCoordinate(1, 1));
     }
     
@@ -188,4 +123,42 @@ public class GameTest {
         }
         assertTrue(false);
     }
+    
+    @Test
+    public void isPositionVisibleTest() {
+        assertTrue(game.isPositionVisible(3, 3));
+        assertFalse(game.isPositionVisible(9, 9));
+    }
+    
+    @Test
+    public void turnCountTest() {
+        assertEquals(0, game.getTurnCount());
+        game.proceed(0, 0);
+        assertEquals(1, game.getTurnCount());
+        game.proceed(0, 0);
+        assertEquals(2, game.getTurnCount());
+    }
+    
+    @Test
+    public void resolveStackedMonsterAndPlayerReturnsTrueWhenNotStacked() {
+        assertTrue(game.resolveStackedMonsterAndPlayer());
+    }
+    
+    @Test
+    public void checkIfOnGoalReturnsFalseWhenNotOnGoal() {
+        assertFalse(game.checkIfOnGoal());
+    }
+    
+    @Test
+    public void monsterAggroTest() {
+        boolean inRange = false;
+        Path path1 = game.getMonsters().get(0).getPath();
+        int range = Math.abs(game.getMonsters().get(0).getX() - game.getPlayer().getY()) + Math.abs(game.getMonsters().get(0).getY() - game.getPlayer().getY());
+        if (range < 6) {
+            assertNotEquals(path1, game.getMonsters().get(0).getPath());
+        } else {
+            assertEquals(path1, game.getMonsters().get(0).getPath());
+        }
+    }   
+    
 }

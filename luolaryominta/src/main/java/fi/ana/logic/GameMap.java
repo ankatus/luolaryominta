@@ -25,7 +25,7 @@ public class GameMap {
      * If the position is not on the map, does nothing.
      * @param x x-coordinate.
      * @param y y-coordinate.
-     * @param wall value.
+     * @param wall true for wall, false for no wall.
      */
     public void setValue(int x, int y, boolean wall) {
         
@@ -41,7 +41,7 @@ public class GameMap {
      * If the position is not on the map, returns false.
      * @param x x-coordinate.
      * @param y y-coordinate.
-     * @return true or false.
+     * @return true for wall, false for no wall.
      */
     public boolean getValue(int x, int y) {
         

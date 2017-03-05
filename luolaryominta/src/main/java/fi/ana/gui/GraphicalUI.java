@@ -27,7 +27,7 @@ public class GraphicalUI implements Runnable {
     /**
      * Constructor.
      *
-     * @param game
+     * @param game game.
      */
     public GraphicalUI(Game game) {
         this.game = game;
@@ -42,14 +42,27 @@ public class GraphicalUI implements Runnable {
         return frame;
     }
 
+    /**
+     * Sets the text of the hp area.
+     * @param s text.
+     */
     public void setTextToHpArea(String s) {
         hpArea.setText(s);
     }
 
+    /**
+     * Sets the text of the countdown area.
+     * Not in use currently.
+     * @param s text.
+     */
     public void setTextToCountdownArea(String s) {
         countdownArea.setText(s);
     }
 
+    /**
+     * Sets the text of the turn count area.
+     * @param s text.
+     */
     public void setTextTurnCountArea(String s) {
         turncountArea.setText(s);
     }
@@ -67,7 +80,7 @@ public class GraphicalUI implements Runnable {
         frame.pack();
         frame.setVisible(true);
     }
-
+    
     private void createGameView(Container container) {
         GraphicsArea ga = new GraphicsArea(game);
         ga.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0), "up");
@@ -156,22 +169,35 @@ public class GraphicalUI implements Runnable {
     }
 
     /**
-     * Calls the repaint() method on the UI's JFrame object.
+     * Calls the repaint() method on the UI's JFrame object and refreshes the counters.
      */
     public void refresh() {
+        setTextToHpArea("HP: " + game.getPlayer().getHp());
+        setTextTurnCountArea("Turn: " + game.getTurnCount());
         frame.repaint();
     }
 
+    /**
+     * Replaces content currently shown in the frame with the game view.
+     */
     public void startGame() {
         frame.getContentPane().remove(0);
         createGameView(frame);
     }
 
+    /**
+     * Replaces content currently shown in the frame with the game over -view.
+     * @param turns how many turns the game lasted.
+     */
     public void endGame(int turns) {
         frame.getContentPane().remove(0);
         createGameOverScreen(frame, turns);
     }
     
+    /**
+     * Replaces content currently shown in the frame with the game won -view.
+     * @param turns how many turns the game lasted.
+     */
     public void winGame(int turns) {
         frame.getContentPane().remove(0);
         createWinScreen(frame, turns);
