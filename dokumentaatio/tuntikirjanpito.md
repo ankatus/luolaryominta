@@ -13,4 +13,6 @@ Päivä | Tunnit | Kuvaus
 21.02.2017 | 7,0h | Reitinetsintäalgoritmin toteutus.
 22.02.2017 | 5,0h | Kaikennäköistä pientä viilausta + alkukantaiset esineet.
 24.02.2017 | 3,0h | Deadlinen juttujen tekemistä.
+29.02.2017 | 2,0h | Viilailua loppua varten.
+05.03.2017 | 4,0h | Höyläystä.
 ... | ... | ...
