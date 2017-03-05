@@ -3,8 +3,7 @@ Yhden pelaajan peli, jossa liikutetaan hahmoa neliöistä koostuvalla kentällä
 
 **Pelaajan toiminnot**: 
 - Hahmon liikuttaminen neljässä suunnassa.
-- Peliä ennen asetusten valitseminen.
-- Mahdollisesti erilaisten kerättyjen esineiden käyttäminen.
+- Pelityypin valitseminen.
 
 **Luokkakaavio tämänhetkisestä tilanteesta**
 
