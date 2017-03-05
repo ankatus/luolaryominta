@@ -10,7 +10,7 @@ Yhden pelaajan peli, jossa liikutetaan hahmoa neliöistä koostuvalla kentällä
 
 ![Luokkakaavio](luokkakaavio.png)  
 
-**(huonoja)Sekvenssikaavioita**  
+**Sekvenssikaavioita**  
 
 ![Pelimoodin valinta](sekvenssi1.png)  
 ![Hahmon liikuttaminen](sekvenssi2.png)
