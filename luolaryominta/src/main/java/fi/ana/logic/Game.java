@@ -16,7 +16,7 @@ public class Game {
     private List<Item> items;
     private PlayerCharacter player;
     private GameMap map;
-    private EntityMover monsterMover;
+    private EntityMover entityMover;
     private GraphicalUI gui;
     private int turnCount;
     private Goal goal;
@@ -28,7 +28,7 @@ public class Game {
         gui = new GraphicalUI(this);
         monsters = new ArrayList();
         items = new ArrayList();
-        monsterMover = new EntityMover(this);
+        entityMover = new EntityMover(this);
         entitySpawner = new EntitySpawner(this);
     }
 
@@ -53,13 +53,13 @@ public class Game {
                 gui.endGame(turnCount);
             }
         }
-        monsterMover.moveTo(player, player.getX() + x, player.getY() + y);
+        entityMover.moveTo(player, player.getX() + x, player.getY() + y);
         if (checkIfOnGoal()) {
             gui.winGame(turnCount);
         }
         resolveStackedItemAndPlayer();
         checkMonsterAggro();
-        monsterMover.moveMonsters(this);
+        entityMover.moveMonsters(this);
         if (!resolveStackedMonsterAndPlayer()) {
             gui.endGame(turnCount);
         }
@@ -303,7 +303,7 @@ public class Game {
     public void checkMonsterAggro() {
         for (Monster m : monsters) {
             if (Math.abs(m.getX() - player.getX()) + Math.abs(m.getY() - player.getY()) < 6) {
-                monsterMover.getNewPath(m);
+                entityMover.getNewPath(m);
             } else if (m.getPath() != null) {
                 m.setPath(null);
             }
