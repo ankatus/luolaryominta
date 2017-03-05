@@ -1,6 +1,5 @@
 # luolaryominta
-luolaryominnassa mennaan hahmolla kartalla, jossa on seiniä ja hirviöitä. Pelin voi ehkä voittaa tulevaisuudessa, vaan ei tällä hetkellä.
-
+luolaryominnassa mennaan hahmolla kartalla, jossa on seiniä ja hirviöitä. Pelin voi voittaa kävelemällä maaliin.
 ## Dokumentaatio
 [Tarkempi kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md)  
 [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)  
